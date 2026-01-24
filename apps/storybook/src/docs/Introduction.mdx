@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Zev Design System
+
+Design system construído com **Web Components (Lit)** e wrappers para **React**.
+
+## Pacotes
+
+| Pacote | Descrição |
+|--------|-----------|
+| `@zev/tokens` | Design tokens como CSS custom properties e constantes TS |
+| `@zev/core` | 7 Web Components com Lit |
+| `@zev/react` | Wrappers React via `@lit/react` |
+
+## Componentes
+
+| Tag | Descrição |
+|-----|-----------|
+| `<zev-navbar>` | Navegação fixa com blur, lang toggle, mobile menu |
+| `<zev-hero>` | Seção full-height com nome display e CTA |
+| `<zev-about>` | Bio, skills, timeline |
+| `<zev-project-card>` | Card de projeto para fundo azul |
+| `<zev-project-detail>` | Modal de detalhe do projeto |
+| `<zev-call-to-action>` | Heading + botão primário |
+| `<zev-footer>` | Links, info, nome decorativo |
+
+## Instalação
+
+```bash
+npm install @zev/core @zev/tokens
+# ou para React:
+npm install @zev/react @zev/tokens
+```
+
+## Uso rápido
+
+### Web Components (vanilla)
+
+```html
+<link rel="stylesheet" href="@zev/tokens/css">
+<script type="module" src="@zev/core"></script>
+
+<zev-hero name="CAIO MALVEZZI" subtitle="Developer"></zev-hero>
+```
+
+### React
+
+```tsx
+import '@zev/tokens/css';
+import { ZevHero, ZevNavbar } from '@zev/react';
+
+function App() {
+  return (
+    <>
+      <ZevNavbar
+        logo="CM"
+        links={[{ label: 'About', href: '#about' }]}
+        onLangToggle={(e) => console.log(e.detail.lang)}
+      />
+      <ZevHero name="CAIO MALVEZZI" subtitle="Developer" />
+    </>
+  );
+}
+```
+
+## Tokens
+
+Os tokens estão disponíveis como CSS custom properties com prefixo `--zev-`:
+
+```css
+/* Cores */
+--zev-color-blue: #0000FF;
+--zev-color-black: #0A0A0A;
+
+/* Tipografia */
+--zev-fs-heading: clamp(2rem, 5vw, 4.5rem);
+--zev-fw-black: 900;
+
+/* Espaçamento */
+--zev-spacing-section: clamp(4rem, 10vh, 8rem);
+```
+
+## Versão atual
+
+**0.1.0** — Veja o [Changelog](?path=/docs/changelog--docs) para detalhes.

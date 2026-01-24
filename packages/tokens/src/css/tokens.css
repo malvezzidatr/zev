@@ -1,0 +1,65 @@
+:root {
+  /* Colors */
+  --zev-color-white: #FFFFFF;
+  --zev-color-black: #0A0A0A;
+  --zev-color-blue: #0000FF;
+  --zev-color-gray: #F5F5F5;
+  --zev-color-gray-dark: #888888;
+
+  /* Derived Colors */
+  --zev-color-card-default: rgba(255, 255, 255, 0.08);
+  --zev-color-card-hover: rgba(255, 255, 255, 0.15);
+  --zev-color-navbar-bg: rgba(255, 255, 255, 0.95);
+  --zev-color-modal-overlay: rgba(0, 0, 0, 0.85);
+  --zev-color-border-subtle: rgba(255, 255, 255, 0.1);
+  --zev-color-border-tag: #e0e0e0;
+  --zev-color-text-modal-content: #444;
+  --zev-color-text-modal-secondary: #555;
+
+  /* Typography - Family */
+  --zev-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Typography - Size */
+  --zev-fs-display: clamp(3rem, 15vw, 12rem);
+  --zev-fs-heading: clamp(2rem, 5vw, 4.5rem);
+  --zev-fs-subheading: clamp(1.25rem, 2.5vw, 2rem);
+  --zev-fs-body: clamp(1rem, 1.2vw, 1.125rem);
+  --zev-fs-small: 0.875rem;
+  --zev-fs-nav: 0.85rem;
+
+  /* Typography - Weight */
+  --zev-fw-regular: 400;
+  --zev-fw-bold: 700;
+  --zev-fw-black: 900;
+
+  /* Typography - Letter Spacing */
+  --zev-ls-tight: -0.02em;
+  --zev-ls-tighter: -0.03em;
+  --zev-ls-wide: 0.05em;
+  --zev-ls-wider: 0.15em;
+
+  /* Typography - Line Height */
+  --zev-lh-display: 0.85;
+  --zev-lh-heading: 1.0;
+  --zev-lh-body: 1.6;
+  --zev-lh-body-relaxed: 1.9;
+
+  /* Spacing */
+  --zev-spacing-section: clamp(4rem, 10vh, 8rem);
+  --zev-spacing-container: clamp(1.5rem, 5vw, 6rem);
+  --zev-container-max-width: 1400px;
+  --zev-gap-grid-desktop: 4rem;
+  --zev-gap-grid-mobile: 3rem;
+  --zev-gap-tags: 0.5rem;
+  --zev-gap-header: 1.5rem;
+
+  /* Transitions */
+  --zev-transition-base: 0.3s ease;
+
+  /* Z-index */
+  --zev-z-navbar: 1000;
+  --zev-z-modal: 2000;
+
+  /* Breakpoints (for JS reference) */
+  --zev-breakpoint-mobile: 768px;
+}
