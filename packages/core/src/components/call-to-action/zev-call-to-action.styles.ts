@@ -3,7 +3,7 @@ import { css } from 'lit';
 export const styles = css`
   :host {
     display: block;
-    background: var(--zev-color-white);
+    background: var(--zev-color-bg-primary);
   }
 
   .cta__label {
@@ -11,7 +11,7 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-wide);
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
   }
 
   .cta__heading {
@@ -21,21 +21,21 @@ export const styles = css`
     letter-spacing: var(--zev-ls-tight);
     line-height: var(--zev-lh-heading);
     margin: 1rem 0;
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
   }
 
   .cta__description {
     font-size: var(--zev-fs-body);
     line-height: var(--zev-lh-body);
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
     margin: 0 0 2rem;
     max-width: 600px;
   }
 
   .cta__button {
     display: inline-block;
-    background: var(--zev-color-black);
-    color: var(--zev-color-white);
+    background: var(--zev-color-text-primary);
+    color: var(--zev-color-bg-primary);
     text-decoration: none;
     text-transform: uppercase;
     font-weight: var(--zev-fw-bold);
@@ -48,6 +48,7 @@ export const styles = css`
   }
 
   .cta__button:hover {
-    background: var(--zev-color-blue);
+    background: var(--zev-color-accent);
+    color: var(--zev-color-text-inverse);
   }
 `;

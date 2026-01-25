@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export const styles = css`
   .about {
-    background: var(--zev-color-gray);
+    background: var(--zev-color-bg-secondary);
   }
 
   .about__grid {
@@ -14,7 +14,7 @@ export const styles = css`
   .about__bio p {
     font-size: var(--zev-fs-body);
     line-height: 1.8;
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
     margin: 0 0 1rem;
   }
 
@@ -31,15 +31,16 @@ export const styles = css`
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-wide);
     border: 1px solid var(--zev-color-border-tag);
+    color: var(--zev-color-text-primary);
     padding: 0.4rem 0.8rem;
     transition: var(--zev-transition-base);
     cursor: default;
   }
 
   .about__skill-tag:hover {
-    background: var(--zev-color-blue);
-    color: var(--zev-color-white);
-    border-color: var(--zev-color-blue);
+    background: var(--zev-color-accent);
+    color: var(--zev-color-text-inverse);
+    border-color: var(--zev-color-accent);
   }
 
   .about__timeline {
@@ -57,7 +58,7 @@ export const styles = css`
   .about__timeline-dot {
     width: 10px;
     height: 10px;
-    background: var(--zev-color-blue);
+    background: var(--zev-color-accent);
     border-radius: 50%;
     margin-top: 0.4rem;
     flex-shrink: 0;
@@ -72,20 +73,20 @@ export const styles = css`
   .about__timeline-year {
     font-size: var(--zev-fs-small);
     font-weight: var(--zev-fw-bold);
-    color: var(--zev-color-blue);
+    color: var(--zev-color-accent);
     letter-spacing: var(--zev-ls-wide);
   }
 
   .about__timeline-title {
     font-size: var(--zev-fs-body);
     font-weight: var(--zev-fw-bold);
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
     margin: 0;
   }
 
   .about__timeline-desc {
     font-size: var(--zev-fs-small);
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
     line-height: var(--zev-lh-body);
     margin: 0;
   }

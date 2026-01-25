@@ -3,8 +3,8 @@ import { css } from 'lit';
 export const styles = css`
   :host {
     display: block;
-    background: var(--zev-color-black);
-    color: var(--zev-color-white);
+    background: var(--zev-color-bg-inverse);
+    color: var(--zev-color-text-inverse);
   }
 
   .footer__container {
@@ -33,7 +33,7 @@ export const styles = css`
   }
 
   .footer__link {
-    color: var(--zev-color-white);
+    color: var(--zev-color-text-inverse);
     opacity: 0.8;
     text-decoration: none;
     font-size: var(--zev-fs-body);
@@ -42,7 +42,7 @@ export const styles = css`
 
   .footer__link:hover {
     opacity: 1;
-    color: var(--zev-color-blue);
+    color: var(--zev-color-accent);
   }
 
   .footer__info {

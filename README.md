@@ -325,3 +325,100 @@ Cada wrapper usa `@lit/react` `createComponent` para:
 ```
 
 Turborepo gerencia a ordem via `dependsOn: ["^build"]`.
+
+## Dark Mode
+
+O dark mode é ativado automaticamente via `prefers-color-scheme` (preferência do SO). Também é possível forçar manualmente via atributo `data-theme`:
+
+```ts
+// Forçar dark
+document.documentElement.setAttribute('data-theme', 'dark');
+
+// Forçar light
+document.documentElement.setAttribute('data-theme', 'light');
+
+// Automático (segue SO)
+document.documentElement.removeAttribute('data-theme');
+```
+
+**Tokens semânticos** usados pelos componentes:
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `--zev-color-bg-primary` | #FFFFFF | #0A0A0A |
+| `--zev-color-bg-secondary` | #F5F5F5 | #1A1A1A |
+| `--zev-color-text-primary` | #0A0A0A | #F5F5F5 |
+| `--zev-color-text-secondary` | #888888 | #AAAAAA |
+| `--zev-color-accent` | #0000FF | #4D4DFF |
+
+No Storybook, use o toggle de tema no toolbar (ícone de espelho) para alternar entre Light, Dark e System.
+
+## Uso local com npm link
+
+Para testar os pacotes em outro projeto sem publicar no npm:
+
+### 1. Build do design system
+
+```bash
+cd c:\Users\malve\Desktop\zev
+npm run build
+```
+
+### 2. Registrar os pacotes globalmente
+
+```bash
+cd packages/tokens && npm link
+cd ../core && npm link
+cd ../react && npm link
+```
+
+Cada `npm link` cria um symlink global apontando para o pacote local.
+
+### 3. Vincular no projeto consumidor
+
+```bash
+cd meu-projeto
+npm link @zev/tokens @zev/core @zev/react
+```
+
+### 4. Usar normalmente
+
+```tsx
+// Os imports funcionam como se os pacotes estivessem instalados
+import '@zev/tokens/css';
+import { ZevNavbar, ZevHero } from '@zev/react';
+```
+
+### 5. Refletir mudanças
+
+Quando alterar algo no design system:
+
+```bash
+cd c:\Users\malve\Desktop\zev
+npm run build
+```
+
+O projeto consumidor reflete as mudanças automaticamente (é um symlink).
+
+### 6. Desvincular
+
+Quando não precisar mais do link:
+
+```bash
+# No projeto consumidor
+npm unlink @zev/tokens @zev/core @zev/react
+
+# Nos pacotes do design system (opcional)
+cd packages/tokens && npm unlink
+cd ../core && npm unlink
+cd ../react && npm unlink
+```
+
+### Troubleshooting
+
+| Problema | Solução |
+|----------|---------|
+| "Module not found" após link | Rode `npm run build` no zev antes de linkar |
+| Duplicação de `lit` | Adicione `resolve.dedupe: ['lit']` no vite/webpack do consumidor |
+| Link não funciona no Windows | Use terminal como Administrador para criar symlinks |
+| Types não resolvem | Verifique que o `dist/` existe (rode build primeiro) |

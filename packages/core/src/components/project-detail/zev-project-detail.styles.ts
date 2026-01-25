@@ -17,7 +17,7 @@ export const styles = css`
   }
 
   .modal__content {
-    background: var(--zev-color-white);
+    background: var(--zev-color-bg-primary);
     max-width: 700px;
     width: 90%;
     max-height: 85vh;
@@ -34,13 +34,13 @@ export const styles = css`
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
     transition: var(--zev-transition-base);
     padding: 0.5rem;
   }
 
   .modal__close:hover {
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
     transform: rotate(90deg);
   }
 
@@ -54,7 +54,7 @@ export const styles = css`
   .modal__number {
     font-size: var(--zev-fs-small);
     font-weight: var(--zev-fw-bold);
-    color: var(--zev-color-blue);
+    color: var(--zev-color-accent);
   }
 
   .modal__role {
@@ -62,7 +62,7 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-wide);
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
     border: 1px solid var(--zev-color-border-tag);
     padding: 0.25rem 0.5rem;
   }
@@ -72,7 +72,7 @@ export const styles = css`
     font-weight: var(--zev-fw-black);
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-tight);
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
     margin: 0 0 1.5rem;
   }
 
@@ -88,8 +88,8 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-wide);
-    background: var(--zev-color-blue);
-    color: var(--zev-color-white);
+    background: var(--zev-color-accent);
+    color: var(--zev-color-text-inverse);
     padding: 0.3rem 0.6rem;
   }
 
@@ -105,7 +105,7 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-wide);
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
     margin: 0 0 1rem;
   }
 
@@ -133,7 +133,7 @@ export const styles = css`
     top: 0.5rem;
     width: 8px;
     height: 8px;
-    background: var(--zev-color-blue);
+    background: var(--zev-color-accent);
   }
 
   @keyframes fadeIn {

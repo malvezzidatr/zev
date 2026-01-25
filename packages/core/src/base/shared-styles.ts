@@ -37,7 +37,7 @@ export const sectionStyles = css`
   .section__tag {
     font-size: var(--zev-fs-small);
     font-weight: var(--zev-fw-bold);
-    color: var(--zev-color-blue);
+    color: var(--zev-color-accent);
     letter-spacing: var(--zev-ls-wide);
     text-transform: uppercase;
   }

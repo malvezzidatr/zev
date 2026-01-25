@@ -1,10 +1,19 @@
 :root {
-  /* Colors */
+  /* Colors - Base Palette */
   --zev-color-white: #FFFFFF;
   --zev-color-black: #0A0A0A;
   --zev-color-blue: #0000FF;
   --zev-color-gray: #F5F5F5;
   --zev-color-gray-dark: #888888;
+
+  /* Colors - Semantic */
+  --zev-color-bg-primary: #FFFFFF;
+  --zev-color-bg-secondary: #F5F5F5;
+  --zev-color-bg-inverse: #0A0A0A;
+  --zev-color-text-primary: #0A0A0A;
+  --zev-color-text-secondary: #888888;
+  --zev-color-text-inverse: #FFFFFF;
+  --zev-color-accent: #0000FF;
 
   /* Derived Colors */
   --zev-color-card-default: rgba(255, 255, 255, 0.08);
@@ -13,8 +22,8 @@
   --zev-color-modal-overlay: rgba(0, 0, 0, 0.85);
   --zev-color-border-subtle: rgba(255, 255, 255, 0.1);
   --zev-color-border-tag: #e0e0e0;
-  --zev-color-text-modal-content: #444;
-  --zev-color-text-modal-secondary: #555;
+  --zev-color-text-modal-content: #444444;
+  --zev-color-text-modal-secondary: #555555;
 
   /* Typography - Family */
   --zev-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -62,4 +71,43 @@
 
   /* Breakpoints (for JS reference) */
   --zev-breakpoint-mobile: 768px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Semantic overrides */
+    --zev-color-bg-primary: #0A0A0A;
+    --zev-color-bg-secondary: #1A1A1A;
+    --zev-color-bg-inverse: #141414;
+    --zev-color-text-primary: #F5F5F5;
+    --zev-color-text-secondary: #AAAAAA;
+    --zev-color-text-inverse: #F5F5F5;
+    --zev-color-accent: #4D4DFF;
+
+    /* Derived overrides */
+    --zev-color-card-default: rgba(255, 255, 255, 0.06);
+    --zev-color-card-hover: rgba(255, 255, 255, 0.12);
+    --zev-color-navbar-bg: rgba(10, 10, 10, 0.95);
+    --zev-color-modal-overlay: rgba(0, 0, 0, 0.9);
+    --zev-color-border-tag: #333333;
+    --zev-color-text-modal-content: #DDDDDD;
+    --zev-color-text-modal-secondary: #BBBBBB;
+  }
+}
+
+[data-theme="dark"] {
+  --zev-color-bg-primary: #0A0A0A;
+  --zev-color-bg-secondary: #1A1A1A;
+  --zev-color-bg-inverse: #141414;
+  --zev-color-text-primary: #F5F5F5;
+  --zev-color-text-secondary: #AAAAAA;
+  --zev-color-text-inverse: #F5F5F5;
+  --zev-color-accent: #4D4DFF;
+  --zev-color-card-default: rgba(255, 255, 255, 0.06);
+  --zev-color-card-hover: rgba(255, 255, 255, 0.12);
+  --zev-color-navbar-bg: rgba(10, 10, 10, 0.95);
+  --zev-color-modal-overlay: rgba(0, 0, 0, 0.9);
+  --zev-color-border-tag: #333333;
+  --zev-color-text-modal-content: #DDDDDD;
+  --zev-color-text-modal-secondary: #BBBBBB;
 }

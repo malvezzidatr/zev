@@ -13,7 +13,7 @@ export const styles = css`
     align-items: center;
     padding: 0 var(--zev-spacing-container);
     position: relative;
-    background: var(--zev-color-white);
+    background: var(--zev-color-bg-primary);
   }
 
   .hero__container {
@@ -31,7 +31,7 @@ export const styles = css`
   .hero__tag {
     font-size: var(--zev-fs-small);
     font-weight: var(--zev-fw-bold);
-    color: var(--zev-color-blue);
+    color: var(--zev-color-accent);
     letter-spacing: var(--zev-ls-wide);
   }
 
@@ -40,12 +40,12 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-wide);
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
   }
 
   .hero__year {
     font-size: var(--zev-fs-small);
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
   }
 
   .hero__name {
@@ -54,7 +54,7 @@ export const styles = css`
     text-transform: uppercase;
     line-height: var(--zev-lh-display);
     letter-spacing: var(--zev-ls-tighter);
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
     margin: 0;
   }
 
@@ -67,7 +67,7 @@ export const styles = css`
 
   .hero__subtitle {
     font-size: var(--zev-fs-body);
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
     margin: 0;
   }
 
@@ -79,15 +79,15 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--zev-color-black);
-    border-bottom: 2px solid var(--zev-color-black);
+    color: var(--zev-color-text-primary);
+    border-bottom: 2px solid var(--zev-color-text-primary);
     padding-bottom: 0.25rem;
     transition: var(--zev-transition-base);
   }
 
   .hero__cta:hover {
-    color: var(--zev-color-blue);
-    border-color: var(--zev-color-blue);
+    color: var(--zev-color-accent);
+    border-color: var(--zev-color-accent);
   }
 
   .hero__cta-arrow {
@@ -104,7 +104,7 @@ export const styles = css`
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.5rem;
-    color: var(--zev-color-gray-dark);
+    color: var(--zev-color-text-secondary);
     animation: bounce 2s infinite;
   }
 

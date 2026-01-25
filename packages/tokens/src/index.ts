@@ -1,5 +1,5 @@
-export { colors, colorsDerived } from './colors.js';
-export type { ColorToken, ColorDerivedToken } from './colors.js';
+export { colors, colorsSemantic, colorsDerived } from './colors.js';
+export type { ColorToken, ColorSemanticToken, ColorDerivedToken, ColorScheme } from './colors.js';
 
 export { fontFamily, fontSize, fontWeight, letterSpacing, lineHeight } from './typography.js';
 

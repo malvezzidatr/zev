@@ -29,7 +29,7 @@ export const styles = css`
     font-weight: var(--zev-fw-black);
     font-size: 1.2rem;
     text-decoration: none;
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
     letter-spacing: var(--zev-ls-tight);
   }
 
@@ -44,7 +44,8 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     background: transparent;
-    border: 2px solid var(--zev-color-black);
+    border: 2px solid var(--zev-color-text-primary);
+    color: var(--zev-color-text-primary);
     padding: 0.4rem 0.8rem;
     cursor: pointer;
     transition: var(--zev-transition-base);
@@ -52,9 +53,9 @@ export const styles = css`
   }
 
   .navbar__lang-toggle:hover {
-    background: var(--zev-color-blue);
-    border-color: var(--zev-color-blue);
-    color: var(--zev-color-white);
+    background: var(--zev-color-accent);
+    border-color: var(--zev-color-accent);
+    color: var(--zev-color-text-inverse);
   }
 
   .navbar__links {
@@ -67,7 +68,7 @@ export const styles = css`
     font-weight: var(--zev-fw-bold);
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--zev-color-black);
+    color: var(--zev-color-text-primary);
     position: relative;
   }
 
@@ -78,7 +79,7 @@ export const styles = css`
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--zev-color-blue);
+    background: var(--zev-color-accent);
     transition: var(--zev-transition-base);
   }
 
@@ -100,7 +101,7 @@ export const styles = css`
     display: block;
     width: 24px;
     height: 2px;
-    background: var(--zev-color-black);
+    background: var(--zev-color-text-primary);
     transition: var(--zev-transition-base);
     transform-origin: center;
   }
@@ -129,7 +130,7 @@ export const styles = css`
       width: 70%;
       height: 100vh;
       flex-direction: column;
-      background: var(--zev-color-white);
+      background: var(--zev-color-bg-primary);
       padding: 4rem 2rem;
       gap: 2rem;
       transform: translateX(100%);
