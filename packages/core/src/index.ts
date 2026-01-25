@@ -16,4 +16,7 @@ export { ZevCallToAction } from './components/call-to-action/zev-call-to-action.
 export { ZevFooter } from './components/footer/zev-footer.js';
 export type { FooterLink, FooterInfo } from './components/footer/zev-footer.js';
 
+export { ZevThemeToggle } from './components/theme-toggle/zev-theme-toggle.js';
+export type { ThemeMode } from './components/theme-toggle/zev-theme-toggle.js';
+
 export { ZevBase } from './base/zev-base.js';

@@ -3,14 +3,19 @@ import { css } from 'lit';
 export const styles = css`
   :host {
     display: block;
+    height: 100%;
   }
 
   .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background: var(--zev-color-card-default);
     border: 1px solid var(--zev-color-card-hover);
     padding: 2rem;
     cursor: pointer;
     transition: var(--zev-transition-base);
+    box-sizing: border-box;
   }
 
   .card:hover {
@@ -52,6 +57,7 @@ export const styles = css`
   }
 
   .card__description {
+    flex: 1;
     font-size: var(--zev-fs-body);
     color: var(--zev-color-white);
     opacity: 0.8;
