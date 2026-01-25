@@ -4,7 +4,9 @@
       "Bash(npm install:*)",
       "Bash(npx turbo:*)",
       "Bash(npm link)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run test:coverage:*)"
     ]
   }
 }

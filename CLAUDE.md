@@ -1,8 +1,9 @@
 # Zev Design System - Contexto de Desenvolvimento
 
-## Regra Principal
+## Regras Principais
 
-**Todo componente novo DEVE ter uma story no Storybook.** Não considere um componente completo sem sua respectiva story.
+1. **Todo componente novo DEVE ter uma story no Storybook.** Não considere um componente completo sem sua respectiva story.
+2. **Todo componente novo DEVE ter testes unitários.** Não considere um componente completo sem seus respectivos testes.
 
 ## Checklist para Novo Componente
 
@@ -24,7 +25,16 @@ Ao criar um novo componente, siga TODOS os passos abaixo:
 - [ ] Mapear eventos custom para props React (`onEventName`)
 - [ ] Exportar em `packages/react/src/index.ts`
 
-### 3. Storybook (apps/storybook)
+### 3. Testes Unitários (packages/core)
+
+- [ ] Criar `packages/core/src/__tests__/zev-{nome}.test.ts`
+- [ ] Testar renderização do componente
+- [ ] Testar todas as props
+- [ ] Testar eventos emitidos
+- [ ] Testar interações (click, hover, etc.)
+- [ ] Rodar `npm run test` e garantir 100% dos testes passando
+
+### 4. Storybook (apps/storybook)
 
 - [ ] Criar `apps/storybook/src/stories/{Nome}.stories.ts`
 - [ ] Incluir JSDoc com descrição, características e eventos
@@ -34,9 +44,10 @@ Ao criar um novo componente, siga TODOS os passos abaixo:
 - [ ] Criar variações relevantes (estados, contextos de uso)
 - [ ] Usar `action()` para logar eventos no painel Actions
 
-### 4. Build e Verificação
+### 5. Build e Verificação
 
 - [ ] Rodar `npm run build` na raiz e garantir zero erros
+- [ ] Rodar `npm run test` e garantir todos os testes passando
 - [ ] Atualizar links globais se necessário (`npm link` nos pacotes)
 
 ## Padrões do Projeto
@@ -134,6 +145,53 @@ export const Default = {
 };
 ```
 
+### Estrutura de Teste
+
+```typescript
+// zev-{nome}.test.ts
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { fixture, cleanup, elementUpdated, shadowQuery } from './test-helpers.js';
+import '../components/{nome}/zev-{nome}.js';
+import type { Zev{Nome} } from '../components/{nome}/zev-{nome}.js';
+
+describe('zev-{nome}', () => {
+  let element: Zev{Nome};
+
+  beforeEach(async () => {
+    element = fixture<Zev{Nome}>('zev-{nome}');
+    await elementUpdated(element);
+  });
+
+  afterEach(() => {
+    cleanup(element);
+  });
+
+  it('should render', () => {
+    expect(element).toBeDefined();
+    expect(element.shadowRoot).toBeDefined();
+  });
+
+  it('should render prop correctly', async () => {
+    element.myProp = 'value';
+    await elementUpdated(element);
+
+    const el = shadowQuery<HTMLElement>(element, '.my-class');
+    expect(el?.textContent).toBe('value');
+  });
+
+  it('should emit event on interaction', async () => {
+    const handler = vi.fn();
+    element.addEventListener('event-name', handler);
+
+    const button = shadowQuery<HTMLButtonElement>(element, 'button');
+    button?.click();
+
+    expect(handler).toHaveBeenCalled();
+    expect(handler.mock.calls[0][0].detail).toHaveProperty('key', 'value');
+  });
+});
+```
+
 ## Tokens de Cor (Dark Mode)
 
 Sempre usar tokens semânticos nos estilos. Nunca hardcodar cores.
@@ -155,10 +213,19 @@ Sempre usar tokens semânticos nos estilos. Nunca hardcodar cores.
 - Eventos sempre com `bubbles: true` e `composed: true`
 - Nomes em kebab-case: `theme-change`, `cta-click`, `card-click`
 
-## Build
+## Build e Testes
 
 ```bash
 npm run build        # Compila tokens → core → react (Turborepo)
+npm run test         # Roda testes unitários (Vitest)
 npm run storybook    # Dev server em localhost:6006
 npm run clean        # Remove dist/ e storybook-static/
+```
+
+### Testes no pacote core
+
+```bash
+cd packages/core
+npm run test         # Roda testes uma vez
+npm run test:watch   # Roda testes em modo watch
 ```
