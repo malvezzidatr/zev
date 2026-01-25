@@ -11,6 +11,73 @@ e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.2.1] - 2025-01-24
+
+### Fixed
+
+#### @zev/core
+- **zev-project-card**: Cards agora mantêm altura uniforme independente do tamanho do conteúdo
+  - `:host` com `height: 100%` para preencher a célula do grid
+  - `.card` com `display: flex; flex-direction: column; height: 100%`
+  - `.card__description` com `flex: 1` empurra tags para o rodapé
+  - Todos os cards na mesma row de grid ficam alinhados
+
+---
+
+## [0.2.0] - 2025-01-24
+
+### Added
+
+#### @zev/tokens
+- Tokens semânticos de cor para suporte a dark mode:
+  - `--zev-color-bg-primary`, `--zev-color-bg-secondary`, `--zev-color-bg-inverse`
+  - `--zev-color-text-primary`, `--zev-color-text-secondary`, `--zev-color-text-inverse`
+  - `--zev-color-accent`
+- Tokens derivados com variantes light/dark:
+  - `--zev-color-card-default`, `--zev-color-card-hover`
+  - `--zev-color-navbar-bg`, `--zev-color-modal-overlay`
+  - `--zev-color-border-tag`
+  - `--zev-color-text-modal-content`, `--zev-color-text-modal-secondary`
+- Dark mode automático via `@media (prefers-color-scheme: dark)`
+- Override manual via atributo `[data-theme="dark"]` e `[data-theme="light"]`
+- Exports TypeScript: `colorsSemantic`, `colorsDerived`, tipos `ColorSemanticToken`, `ColorDerivedToken`, `ColorScheme`
+
+#### @zev/core
+- **zev-theme-toggle**: Novo componente botão de alternância light/dark
+  - Ícone de lua (light) e sol (dark)
+  - Altera `data-theme` no `<html>` automaticamente
+  - Detecta tema inicial via `prefers-color-scheme` ou `data-theme` existente
+  - Emite evento `theme-change` com `{ theme: 'light' | 'dark' }`
+  - Botão circular com hover accent
+
+#### @zev/react
+- `ZevThemeToggle` wrapper com evento `onThemeChange`
+- Export do tipo `ThemeMode`
+
+#### Storybook
+- Toggle de tema no toolbar (Light / Dark / System)
+- Decorator global para aplicar `data-theme` no preview
+- Story `ThemeToggle` com variantes Default, Dark Mode e Dentro da Navbar
+
+### Changed
+
+#### @zev/core
+- Todos os componentes migrados de tokens literais para tokens semânticos:
+  - `--zev-color-black` → `--zev-color-text-primary`
+  - `--zev-color-white` → `--zev-color-bg-primary` / `--zev-color-text-inverse`
+  - `--zev-color-blue` → `--zev-color-accent`
+  - `--zev-color-gray` → `--zev-color-bg-secondary`
+  - `--zev-color-gray-dark` → `--zev-color-text-secondary`
+- **zev-navbar**: Fundo e textos adaptam ao tema
+- **zev-hero**: Background, nome, labels e CTA adaptam ao tema
+- **zev-about**: Background, bio, skills e timeline adaptam ao tema
+- **zev-project-detail**: Modal content, close button, tags adaptam ao tema
+- **zev-call-to-action**: Background, heading, botão adaptam ao tema
+- **zev-footer**: Cores de fundo e links adaptam ao tema
+- **shared-styles**: `.section__tag` usa `--zev-color-accent` em vez de `--zev-color-blue`
+
+---
+
 ## [0.1.0] - 2025-01-24
 
 Versão inicial do design system Zev.

@@ -19,4 +19,7 @@ export type { FooterLink, FooterInfo } from './components/footer/zev-footer.js';
 export { ZevThemeToggle } from './components/theme-toggle/zev-theme-toggle.js';
 export type { ThemeMode } from './components/theme-toggle/zev-theme-toggle.js';
 
+export { ZevBlogCard } from './components/blog-card/zev-blog-card.js';
+export type { BlogPostData } from './components/blog-card/zev-blog-card.js';
+
 export { ZevBase } from './base/zev-base.js';
