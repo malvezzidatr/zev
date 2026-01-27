@@ -22,4 +22,15 @@ export type { ThemeMode } from './components/theme-toggle/zev-theme-toggle.js';
 export { ZevBlogCard } from './components/blog-card/zev-blog-card.js';
 export type { BlogPostData } from './components/blog-card/zev-blog-card.js';
 
+export { ZevTag } from './components/tag/zev-tag.js';
+export type { TagVariant, TagSize } from './components/tag/zev-tag.js';
+
+export { ZevSectionHeader } from './components/section-header/zev-section-header.js';
+export type { SectionHeaderVariant, SectionHeaderSize } from './components/section-header/zev-section-header.js';
+
+export { ZevTimeline } from './components/timeline/zev-timeline.js';
+export type { TimelineItemData } from './components/timeline/zev-timeline.js';
+
+export { ZevTimelineItem } from './components/timeline-item/zev-timeline-item.js';
+
 export { ZevBase } from './base/zev-base.js';

@@ -5,6 +5,58 @@ Todas as mudanças notáveis do projeto serão documentadas neste arquivo.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [0.3.0] - 2025-01-27
+
+### Added
+
+#### @zev/core
+
+- **zev-tag**: Componente de tag reutilizável para labels, skills, categorias e tech stacks
+  - Variantes: `default`, `accent`, `outline`, `ghost`
+  - Tamanhos: `small`, `medium`, `large`
+  - Modo interativo com hover effects e evento `tag-click`
+  - Botão de remoção opcional com evento `tag-remove`
+  - Suporta conteúdo via slot ou prop `label`
+
+- **zev-section-header**: Header de seção reutilizável com tag numerada e título
+  - Tag opcional no formato `[0X]`
+  - Variantes de layout: `inline`, `stacked`, `centered`
+  - Tamanhos: `small`, `medium`, `large`
+  - Suporta título via slot ou prop `title`
+
+- **zev-timeline**: Container para exibir histórico, experiência ou eventos cronológicos
+  - Recebe items via prop `items` ou via slot
+  - Modo `connected` adiciona linha vertical conectando os items
+  - Propaga `connected` automaticamente para filhos slotted
+
+- **zev-timeline-item**: Item individual de timeline
+  - Props: `year`, `title`, `description`
+  - Modo `connected` para linha conectora
+  - Slots para título e descrição customizados
+
+#### @zev/react
+
+- `ZevTag` wrapper com eventos `onTagClick` e `onTagRemove`
+- `ZevSectionHeader` wrapper
+- `ZevTimeline` wrapper
+- `ZevTimelineItem` wrapper
+- Export dos tipos `TagVariant`, `TagSize`, `SectionHeaderVariant`, `SectionHeaderSize`, `TimelineItemData`
+
+#### Storybook
+
+- Story `Tag` com 8 variantes (Default, Variantes, Tamanhos, Interativa, Removível, Lista de Skills, Tech Stack em Card, Tags Accent)
+- Story `SectionHeader` com 6 variantes (Default, Variantes de Layout, Tamanhos, Sem Tag, Em Contexto, Em Fundo Escuro)
+- Story `Timeline` com 7 variantes (Default, Connected, Slotted Items, Item Individual, Em Seção About, Timeline de Educação, Conteúdo Customizado)
+
+### Tests
+
+- 21 testes unitários para `zev-tag`
+- 13 testes unitários para `zev-section-header`
+- 12 testes unitários para `zev-timeline-item`
+- 10 testes unitários para `zev-timeline`
+
+---
+
 ## [0.2.1] - 2025-01-24
 
 ### Fixed
