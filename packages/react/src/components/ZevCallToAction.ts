@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
-import { ZevCallToAction as ZevCallToActionElement } from '@zev/core';
+import { ZevCallToAction as ZevCallToActionElement } from '@malvezzidatr/zev-core';
 
 export const ZevCallToAction = createComponent({
   tagName: 'zev-call-to-action',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
-import { ZevProjectCard as ZevProjectCardElement } from '@zev/core';
+import { ZevProjectCard as ZevProjectCardElement } from '@malvezzidatr/zev-core';
 
 export const ZevProjectCard = createComponent({
   tagName: 'zev-project-card',

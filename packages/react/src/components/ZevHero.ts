@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
-import { ZevHero as ZevHeroElement } from '@zev/core';
+import { ZevHero as ZevHeroElement } from '@malvezzidatr/zev-core';
 
 export const ZevHero = createComponent({
   tagName: 'zev-hero',

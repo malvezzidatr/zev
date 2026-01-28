@@ -1,6 +1,17 @@
 {
-  "name": "@zev/tokens",
-  "version": "0.1.0",
+  "name": "@malvezzidatr/zev-tokens",
+  "version": "0.3.0",
+  "description": "Design tokens for Zev Design System",
+  "author": "malvezzidatr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/malvezzidatr/zev.git",
+    "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

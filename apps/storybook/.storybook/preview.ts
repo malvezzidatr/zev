@@ -1,4 +1,4 @@
-import '@zev/tokens/css';
+import '@malvezzidatr/zev-tokens/css';
 import type { Preview } from '@storybook/web-components-vite';
 import { html } from 'lit';
 

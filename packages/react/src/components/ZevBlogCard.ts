@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
-import { ZevBlogCard as ZevBlogCardElement } from '@zev/core';
+import { ZevBlogCard as ZevBlogCardElement } from '@malvezzidatr/zev-core';
 
 export const ZevBlogCard = createComponent({
   tagName: 'zev-blog-card',

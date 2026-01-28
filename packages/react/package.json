@@ -1,6 +1,17 @@
 {
-  "name": "@zev/react",
-  "version": "0.1.0",
+  "name": "@malvezzidatr/zev-react",
+  "version": "0.3.0",
+  "description": "React wrappers for Zev Design System",
+  "author": "malvezzidatr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/malvezzidatr/zev.git",
+    "directory": "packages/react"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,7 +28,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@zev/core": "*",
+    "@malvezzidatr/zev-core": "^0.3.0",
     "@lit/react": "^1.0.6"
   },
   "peerDependencies": {

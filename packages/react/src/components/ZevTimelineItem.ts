@@ -1,6 +1,6 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
-import { ZevTimelineItem as ZevTimelineItemElement } from '@zev/core';
+import { ZevTimelineItem as ZevTimelineItemElement } from '@malvezzidatr/zev-core';
 
 export const ZevTimelineItem = createComponent({
   tagName: 'zev-timeline-item',

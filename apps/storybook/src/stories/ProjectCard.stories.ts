@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
-import '@zev/core';
+import '@malvezzidatr/zev-core';
 
 /**
  * ## zev-project-card

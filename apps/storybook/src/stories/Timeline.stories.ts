@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@zev/core';
+import '@malvezzidatr/zev-core';
 
 /**
  * ## zev-timeline & zev-timeline-item

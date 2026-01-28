@@ -1,6 +1,6 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
-import { ZevAbout as ZevAboutElement } from '@zev/core';
+import { ZevAbout as ZevAboutElement } from '@malvezzidatr/zev-core';
 
 export const ZevAbout = createComponent({
   tagName: 'zev-about',

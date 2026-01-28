@@ -1,6 +1,17 @@
 {
-  "name": "@zev/core",
-  "version": "0.1.0",
+  "name": "@malvezzidatr/zev-core",
+  "version": "0.3.0",
+  "description": "Core Web Components for Zev Design System",
+  "author": "malvezzidatr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/malvezzidatr/zev.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,7 +33,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@zev/tokens": "*",
+    "@malvezzidatr/zev-tokens": "^0.3.0",
     "lit": "^3.2.0"
   },
   "devDependencies": {

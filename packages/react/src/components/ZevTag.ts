@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
-import { ZevTag as ZevTagElement } from '@zev/core';
+import { ZevTag as ZevTagElement } from '@malvezzidatr/zev-core';
 
 export const ZevTag = createComponent({
   tagName: 'zev-tag',

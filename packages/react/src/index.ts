@@ -12,4 +12,4 @@ export { ZevSectionHeader } from './components/ZevSectionHeader.js';
 export { ZevTimeline } from './components/ZevTimeline.js';
 export { ZevTimelineItem } from './components/ZevTimelineItem.js';
 
-export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData } from '@zev/core';
+export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData } from '@malvezzidatr/zev-core';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
-import { ZevThemeToggle as ZevThemeToggleElement } from '@zev/core';
+import { ZevThemeToggle as ZevThemeToggleElement } from '@malvezzidatr/zev-core';
 
 export const ZevThemeToggle = createComponent({
   tagName: 'zev-theme-toggle',
