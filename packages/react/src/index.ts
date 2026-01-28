@@ -11,5 +11,13 @@ export { ZevTag } from './components/ZevTag.js';
 export { ZevSectionHeader } from './components/ZevSectionHeader.js';
 export { ZevTimeline } from './components/ZevTimeline.js';
 export { ZevTimelineItem } from './components/ZevTimelineItem.js';
+export { ZevBadge } from './components/ZevBadge.js';
+export { ZevLoader } from './components/ZevLoader.js';
+export { ZevButton } from './components/ZevButton.js';
+export { ZevInput } from './components/ZevInput.js';
+export { ZevSelect } from './components/ZevSelect.js';
+export { ZevEmptyState } from './components/ZevEmptyState.js';
+export { ZevPagination } from './components/ZevPagination.js';
+export { ZevJobCard } from './components/ZevJobCard.js';
 
-export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData } from '@malvezzidatr/zev-core';
+export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData, BadgeVariant, LoaderSize, ButtonVariant, ButtonSize, InputIcon, SelectOption } from '@malvezzidatr/zev-core';

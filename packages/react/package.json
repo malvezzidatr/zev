@@ -1,6 +1,6 @@
 {
   "name": "@malvezzidatr/zev-react",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "React wrappers for Zev Design System",
   "author": "malvezzidatr",
   "license": "MIT",
@@ -21,7 +21,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",

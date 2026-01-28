@@ -33,4 +33,25 @@ export type { TimelineItemData } from './components/timeline/zev-timeline.js';
 
 export { ZevTimelineItem } from './components/timeline-item/zev-timeline-item.js';
 
+export { ZevBadge } from './components/badge/zev-badge.js';
+export type { BadgeVariant } from './components/badge/zev-badge.js';
+
+export { ZevLoader } from './components/loader/zev-loader.js';
+export type { LoaderSize } from './components/loader/zev-loader.js';
+
+export { ZevButton } from './components/button/zev-button.js';
+export type { ButtonVariant, ButtonSize } from './components/button/zev-button.js';
+
+export { ZevInput } from './components/input/zev-input.js';
+export type { InputIcon } from './components/input/zev-input.js';
+
+export { ZevSelect } from './components/select/zev-select.js';
+export type { SelectOption } from './components/select/zev-select.js';
+
+export { ZevEmptyState } from './components/empty-state/zev-empty-state.js';
+
+export { ZevPagination } from './components/pagination/zev-pagination.js';
+
+export { ZevJobCard } from './components/job-card/zev-job-card.js';
+
 export { ZevBase } from './base/zev-base.js';

@@ -11,6 +11,97 @@ e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.4.0] - 2025-01-28
+
+### Added
+
+#### @malvezzidatr/zev-tokens
+
+- **Tokens de status**: Novas cores para estados
+  - `--zev-color-success`: #22C55E (light) / #4ADE80 (dark)
+  - `--zev-color-warning`: #F59E0B (light) / #FBBF24 (dark)
+  - `--zev-color-info`: #3B82F6 (light) / #60A5FA (dark)
+  - `--zev-color-error`: #EF4444 (light) / #F87171 (dark)
+
+#### @malvezzidatr/zev-core
+
+- **zev-badge** — Badge para status e labels
+  - Variantes: `success`, `warning`, `info`, `neutral`
+  - Suporta conteúdo via slot ou prop `label`
+
+- **zev-loader** — Skeleton loader com animação shimmer
+  - Tamanhos: `sm`, `md`, `lg`
+  - Gradiente animado para indicar carregamento
+
+- **zev-button** — Botão reutilizável
+  - Variantes: `primary`, `secondary`, `ghost`
+  - Tamanhos: `sm`, `md`, `lg`
+  - Estado `disabled`
+  - Evento `button-click`
+
+- **zev-input** — Campo de texto com ícone opcional
+  - Props: `placeholder`, `value`, `disabled`
+  - Ícones: `search`, `filter`, `none`
+  - Evento `input-change` com `{ value }`
+
+- **zev-select** — Dropdown select
+  - Props: `options` (array de SelectOption), `value`, `placeholder`, `disabled`
+  - Evento `select-change` com `{ value, label }`
+  - Tipo exportado: `SelectOption`
+
+- **zev-empty-state** — Estado vazio para listas
+  - Props: `title`, `description`
+  - Slots: `icon`, `action`
+
+- **zev-pagination** — Controle de paginação
+  - Props: `current-page`, `total-pages`
+  - Evento `page-change` com `{ page }`
+  - Ellipsis inteligente para muitas páginas
+  - Acessibilidade com `aria-label` nos botões
+
+- **zev-job-card** — Card para listagem de vagas
+  - Props: `title`, `company`, `location`, `tags`, `salary`, `remote`, `posted-at`, `url`, `source`
+  - Evento `card-click` com `{ title, company, url }`
+  - Usa `zev-tag` para tecnologias (limite de 5)
+  - Usa `zev-badge` para indicar vaga remota
+
+#### @malvezzidatr/zev-react
+
+- `ZevBadge` wrapper
+- `ZevLoader` wrapper
+- `ZevButton` wrapper com evento `onButtonClick`
+- `ZevInput` wrapper com evento `onInputChange`
+- `ZevSelect` wrapper com evento `onSelectChange`
+- `ZevEmptyState` wrapper
+- `ZevPagination` wrapper com evento `onPageChange`
+- `ZevJobCard` wrapper com evento `onCardClick`
+- Export dos tipos: `BadgeVariant`, `LoaderSize`, `ButtonVariant`, `ButtonSize`, `InputIcon`, `SelectOption`
+
+#### Storybook
+
+- Story `Badge` com variantes e exemplos de uso
+- Story `Loader` com 3 tamanhos
+- Story `Button` com variantes, tamanhos e estados
+- Story `Input` com ícones e estados
+- Story `Select` com opções e estados
+- Story `EmptyState` com variações de conteúdo
+- Story `Pagination` com diferentes quantidades de páginas
+- Story `JobCard` com lista de vagas e variações
+
+### Tests
+
+- 79 novos testes unitários para os 8 componentes
+  - zev-badge: 7 testes
+  - zev-loader: 5 testes
+  - zev-button: 12 testes
+  - zev-input: 10 testes
+  - zev-select: 9 testes
+  - zev-empty-state: 9 testes
+  - zev-pagination: 13 testes
+  - zev-job-card: 14 testes
+
+---
+
 ## [0.3.0] - 2025-01-27
 
 ### Added

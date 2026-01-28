@@ -15,6 +15,12 @@
   --zev-color-text-inverse: #FFFFFF;
   --zev-color-accent: #0000FF;
 
+  /* Colors - Status */
+  --zev-color-success: #22C55E;
+  --zev-color-warning: #F59E0B;
+  --zev-color-info: #3B82F6;
+  --zev-color-error: #EF4444;
+
   /* Derived Colors */
   --zev-color-card-default: rgba(255, 255, 255, 0.08);
   --zev-color-card-hover: rgba(255, 255, 255, 0.15);
@@ -84,6 +90,12 @@
     --zev-color-text-inverse: #F5F5F5;
     --zev-color-accent: #4D4DFF;
 
+    /* Status overrides */
+    --zev-color-success: #4ADE80;
+    --zev-color-warning: #FBBF24;
+    --zev-color-info: #60A5FA;
+    --zev-color-error: #F87171;
+
     /* Derived overrides */
     --zev-color-card-default: rgba(255, 255, 255, 0.06);
     --zev-color-card-hover: rgba(255, 255, 255, 0.12);
@@ -103,6 +115,10 @@
   --zev-color-text-secondary: #AAAAAA;
   --zev-color-text-inverse: #F5F5F5;
   --zev-color-accent: #4D4DFF;
+  --zev-color-success: #4ADE80;
+  --zev-color-warning: #FBBF24;
+  --zev-color-info: #60A5FA;
+  --zev-color-error: #F87171;
   --zev-color-card-default: rgba(255, 255, 255, 0.06);
   --zev-color-card-hover: rgba(255, 255, 255, 0.12);
   --zev-color-navbar-bg: rgba(10, 10, 10, 0.95);
