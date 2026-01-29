@@ -5,6 +5,56 @@ Todas as mudanças notáveis do projeto serão documentadas neste arquivo.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [0.6.0] - 2025-01-29
+
+### Added
+
+#### @malvezzidatr/zev-core
+
+- **zev-modal**: Modal genérico com overlay e animações
+  - Tamanhos: `sm`, `md`, `lg`, `xl`, `full`
+  - Props: `open`, `title`, `size`, `hideClose`, `closeOnOverlay`, `closeOnEscape`
+  - Eventos: `modal-open`, `modal-close`
+  - Fecha via ESC, click no overlay ou botão X
+  - Bloqueia scroll do body quando aberto
+  - Slots para content e footer
+
+- **zev-file-upload**: Upload de arquivos com drag & drop
+  - Props: `label`, `accept`, `maxSize`, `maxFiles`, `multiple`, `disabled`, `hint`, `error`
+  - Eventos: `file-select`, `file-remove`, `file-error`
+  - Validação de tipo e tamanho de arquivo
+  - Lista de arquivos selecionados com remoção
+  - Estados visuais para drag, error e disabled
+
+- **zev-progress-bar**: Barra de progresso com múltiplas variantes
+  - Variantes: `primary`, `success`, `warning`, `error`, `info`
+  - Tamanhos: `sm`, `md`, `lg`
+  - Props: `value`, `max`, `label`, `showValue`, `indeterminate`, `striped`, `animated`
+  - Modo indeterminado para progresso desconhecido
+  - Efeito listrado com animação opcional
+
+#### @malvezzidatr/zev-react
+
+- `ZevModal` wrapper com eventos `onModalOpen` e `onModalClose`
+- `ZevFileUpload` wrapper com eventos `onFileSelect`, `onFileRemove` e `onFileError`
+- `ZevProgressBar` wrapper
+- Export dos tipos: `ModalSize`, `UploadedFile`, `ProgressBarVariant`, `ProgressBarSize`
+
+#### Storybook
+
+- Story `Modal` com 6 variantes (Default, Com Footer, Tamanhos, Sem Botão Fechar, Sem Fechar no Overlay, Exemplo com Formulário)
+- Story `FileUpload` com 8 variantes (Default, Upload de Imagens, Upload de Documentos, Múltiplos Arquivos, Com Erro, Desabilitado, Tamanho Máximo Pequeno, Exemplo em Formulário)
+- Story `ProgressBar` com 8 variantes (Default, Com Label e Valor, Variantes, Tamanhos, Indeterminado, Listrado, Exemplo de Upload, Exemplo de Etapas)
+
+### Tests
+
+- 14 testes unitários para `zev-modal`
+- 18 testes unitários para `zev-file-upload`
+- 15 testes unitários para `zev-progress-bar`
+- Total: 331 testes passando
+
+---
+
 ## [0.5.0] - 2025-01-29
 
 ### Added
