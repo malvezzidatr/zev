@@ -229,3 +229,25 @@ cd packages/core
 npm run test         # Roda testes uma vez
 npm run test:watch   # Roda testes em modo watch
 ```
+
+## Publicação (npm publish)
+
+Ao publicar uma nova versão no npm, siga TODOS os passos:
+
+1. [ ] Atualizar versão em `packages/tokens/package.json`
+2. [ ] Atualizar versão em `packages/core/package.json` (e dependência do tokens)
+3. [ ] Atualizar versão em `packages/react/package.json` (e dependência do core)
+4. [ ] Atualizar `CHANGELOG.md` na raiz do projeto
+5. [ ] **IMPORTANTE: Atualizar `apps/storybook/src/docs/Changelog.mdx`** (arquivo separado!)
+6. [ ] Rodar `npm run build` e `npm run test`
+7. [ ] Publicar na ordem: tokens → core → react
+8. [ ] Commit e push para disparar deploy do Storybook
+
+```bash
+# Ordem de publicação
+cd packages/tokens && npm publish --access public
+cd ../core && npm publish --access public
+cd ../react && npm publish --access public
+```
+
+> ⚠️ **Atenção:** O arquivo `Changelog.mdx` do Storybook é separado do `CHANGELOG.md` da raiz. Ambos devem ser atualizados para que o changelog apareça corretamente no Storybook publicado.
