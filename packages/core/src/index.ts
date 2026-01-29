@@ -60,4 +60,13 @@ export { ZevJobCard } from './components/job-card/zev-job-card.js';
 export { ZevStickySidebar } from './components/sticky-sidebar/zev-sticky-sidebar.js';
 export type { SidebarVariant } from './components/sticky-sidebar/zev-sticky-sidebar.js';
 
+export { ZevModal } from './components/modal/zev-modal.js';
+export type { ModalSize } from './components/modal/zev-modal.js';
+
+export { ZevFileUpload } from './components/file-upload/zev-file-upload.js';
+export type { UploadedFile } from './components/file-upload/zev-file-upload.js';
+
+export { ZevProgressBar } from './components/progress-bar/zev-progress-bar.js';
+export type { ProgressBarVariant, ProgressBarSize } from './components/progress-bar/zev-progress-bar.js';
+
 export { ZevBase } from './base/zev-base.js';

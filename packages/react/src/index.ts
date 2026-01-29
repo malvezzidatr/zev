@@ -21,5 +21,8 @@ export { ZevEmptyState } from './components/ZevEmptyState.js';
 export { ZevPagination } from './components/ZevPagination.js';
 export { ZevJobCard } from './components/ZevJobCard.js';
 export { ZevStickySidebar } from './components/ZevStickySidebar.js';
+export { ZevModal } from './components/ZevModal.js';
+export { ZevFileUpload } from './components/ZevFileUpload.js';
+export { ZevProgressBar } from './components/ZevProgressBar.js';
 
-export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData, BadgeVariant, LoaderSize, ButtonVariant, ButtonSize, InputIcon, SelectOption, MultiSelectOption, SidebarVariant } from '@malvezzidatr/zev-core';
+export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData, BadgeVariant, LoaderSize, ButtonVariant, ButtonSize, InputIcon, SelectOption, MultiSelectOption, SidebarVariant, ModalSize, UploadedFile, ProgressBarVariant, ProgressBarSize } from '@malvezzidatr/zev-core';
