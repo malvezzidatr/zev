@@ -5,9 +5,10 @@ import '@malvezzidatr/zev-core';
 /**
  * ## zev-select
  *
- * Componente de select dropdown.
+ * Componente de select dropdown com label opcional.
  *
  * ### Características
+ * - Label opcional acima do select
  * - Recebe array de opções via prop
  * - Placeholder customizável
  * - Estado disabled
@@ -21,6 +22,11 @@ export default {
   component: 'zev-select',
   tags: ['autodocs'],
   argTypes: {
+    label: {
+      control: 'text',
+      description: 'Label exibida acima do select',
+      table: { defaultValue: { summary: '' } },
+    },
     placeholder: {
       control: 'text',
       description: 'Texto placeholder',
@@ -52,6 +58,7 @@ const defaultOptions = [
 
 export const Default = {
   args: {
+    label: '',
     placeholder: 'Selecione uma tecnologia',
     value: '',
     disabled: false,
@@ -60,10 +67,25 @@ export const Default = {
   render: (args: any) => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-select
+        label=${args.label}
         placeholder=${args.placeholder}
         value=${args.value}
         ?disabled=${args.disabled}
         .options=${args.options}
+        @select-change=${(e: CustomEvent) => action('select-change')(e.detail)}
+      ></zev-select>
+    </div>
+  `,
+};
+
+export const WithLabel = {
+  name: 'Com Label',
+  render: () => html`
+    <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
+      <zev-select
+        label="Tecnologia"
+        placeholder="Selecione uma tecnologia"
+        .options=${defaultOptions}
         @select-change=${(e: CustomEvent) => action('select-change')(e.detail)}
       ></zev-select>
     </div>
@@ -115,7 +137,8 @@ export const JobFilters = {
         </h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
           <zev-select
-            placeholder="Modalidade"
+            label="Modalidade"
+            placeholder="Selecione"
             .options=${[
               { value: 'remote', label: 'Remoto' },
               { value: 'hybrid', label: 'Híbrido' },
@@ -124,7 +147,8 @@ export const JobFilters = {
             @select-change=${(e: CustomEvent) => action('modalidade')(e.detail)}
           ></zev-select>
           <zev-select
-            placeholder="Senioridade"
+            label="Senioridade"
+            placeholder="Selecione"
             .options=${[
               { value: 'junior', label: 'Júnior' },
               { value: 'mid', label: 'Pleno' },
@@ -133,7 +157,8 @@ export const JobFilters = {
             @select-change=${(e: CustomEvent) => action('senioridade')(e.detail)}
           ></zev-select>
           <zev-select
-            placeholder="Fonte"
+            label="Fonte"
+            placeholder="Selecione"
             .options=${[
               { value: 'github', label: 'GitHub Jobs' },
               { value: 'linkedin', label: 'LinkedIn' },

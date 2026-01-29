@@ -5,6 +5,127 @@ Todas as mudanças notáveis do projeto serão documentadas neste arquivo.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [0.5.0] - 2025-01-29
+
+### Added
+
+#### @malvezzidatr/zev-core
+
+- **zev-multi-select**: Novo componente de select com seleção múltipla
+  - Usa `zev-tag` para exibir itens selecionados
+  - Campo de busca opcional para filtrar opções
+  - Limite configurável de tags visíveis (`maxDisplayTags`) com indicador "+N"
+  - Props: `label`, `placeholder`, `searchPlaceholder`, `options`, `value`, `disabled`, `searchable`, `maxDisplayTags`
+  - Eventos: `multi-select-change`, `multi-select-search`
+  - Suporte completo a dark mode
+
+- **zev-input**: Novas funcionalidades
+  - Prop `label` para exibir label acima do input
+  - Botão de limpar (X) aparece automaticamente quando há texto
+  - Evento `input-clear` emitido ao limpar
+
+- **zev-select**: Novas funcionalidades
+  - Prop `label` para exibir label acima do select
+
+- **zev-navbar**: Novas funcionalidades
+  - Prop `showLangToggle` (padrão: `true`) para controlar visibilidade do botão de idioma
+  - Atributo HTML: `show-lang-toggle`
+
+#### @malvezzidatr/zev-react
+
+- `ZevMultiSelect` wrapper com eventos `onMultiSelectChange` e `onMultiSelectSearch`
+- Export do tipo `MultiSelectOption`
+
+#### Storybook
+
+- Story `MultiSelect` com 7 variantes (Default, Com Valores Selecionados, Com Muitos Selecionados, Sem Busca, Desabilitado, Tecnologias, Filtros de Vagas)
+- Stories atualizadas para `Input` com label e botão de limpar
+- Stories atualizadas para `Select` com label
+- Story `Navbar` com variante "Sem Toggle de Idioma"
+
+### Fixed
+
+#### @malvezzidatr/zev-core
+
+- **zev-job-card**: Cards agora mantêm altura uniforme em grids
+  - `:host` com `height: 100%` para preencher célula do grid
+  - `.job-card` com `height: 100%` e `min-height: 220px`
+  - `.job-card__tags` com `flex: 1` para ocupar espaço disponível
+  - Seção de tags sempre renderizada para layout consistente
+
+### Tests
+
+- 19 testes unitários para `zev-multi-select`
+- 2 novos testes para `zev-navbar` (showLangToggle)
+- Testes atualizados para `zev-input` e `zev-select`
+- Total: 284 testes passando
+
+---
+
+## [0.4.0] - 2025-01-28
+
+### Added
+
+#### @malvezzidatr/zev-core
+
+- **zev-badge**: Componente de badge para status e labels
+  - Variantes: `default`, `success`, `warning`, `info`, `neutral`
+  - Suporte a dark mode
+
+- **zev-loader**: Componente de loading spinner
+  - Tamanhos: `small`, `medium`, `large`
+  - Animação de rotação suave
+
+- **zev-button**: Componente de botão reutilizável
+  - Variantes: `primary`, `secondary`, `outline`, `ghost`
+  - Tamanhos: `small`, `medium`, `large`
+  - Estados: `disabled`, `loading`
+  - Evento `button-click`
+
+- **zev-input**: Componente de input de texto
+  - Ícones opcionais (left/right)
+  - Placeholder customizável
+  - Estado disabled
+  - Evento `input-change`
+
+- **zev-select**: Componente de select dropdown
+  - Recebe array de opções via prop
+  - Placeholder customizável
+  - Estado disabled
+  - Evento `select-change`
+
+- **zev-empty-state**: Componente para estados vazios
+  - Ícone, título e descrição customizáveis
+  - Slot para ações
+
+- **zev-pagination**: Componente de paginação
+  - Props: `currentPage`, `totalPages`, `visiblePages`
+  - Navegação por página, anterior/próximo
+  - Evento `page-change`
+
+- **zev-job-card**: Card para listagem de vagas
+  - Props: `title`, `company`, `location`, `tags`, `salary`, `remote`, `postedAt`, `url`, `source`
+  - Badge de remoto
+  - Tags de tecnologia
+  - Evento `card-click`
+
+- **zev-sticky-sidebar**: Sidebar com posição sticky
+  - Props: `image`, `title`, `description`, `variant`, `sticky`
+  - Variantes de cor: `primary`, `success`, `warning`, `info`, `neutral`
+  - Placeholder de imagem quando não fornecida
+
+#### @malvezzidatr/zev-react
+
+- Wrappers React para todos os novos componentes
+- Export dos tipos: `BadgeVariant`, `LoaderSize`, `ButtonVariant`, `ButtonSize`, `InputIcon`, `SelectOption`, `SidebarVariant`
+
+#### Storybook
+
+- Stories para todos os 8 novos componentes
+- Documentação completa com JSDoc
+
+---
+
 ## [0.3.0] - 2025-01-27
 
 ### Added

@@ -5,6 +5,19 @@ export const styles = css`
     display: block;
   }
 
+  .select-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .select__label {
+    font-family: var(--zev-font-primary);
+    font-size: var(--zev-fs-small);
+    font-weight: 500;
+    color: var(--zev-color-text-primary);
+  }
+
   .select-wrapper {
     position: relative;
     display: flex;
@@ -59,5 +72,9 @@ export const styles = css`
   /* Style placeholder option */
   .select option[value=""] {
     color: var(--zev-color-text-secondary);
+  }
+
+  :host([disabled]) .select__label {
+    opacity: 0.5;
   }
 `;

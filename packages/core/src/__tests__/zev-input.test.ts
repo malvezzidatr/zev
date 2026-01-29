@@ -25,6 +25,7 @@ describe('zev-input', () => {
     expect(element.value).toBe('');
     expect(element.icon).toBe('none');
     expect(element.disabled).toBe(false);
+    expect(element.label).toBe('');
   });
 
   it('should render placeholder', async () => {
@@ -100,5 +101,73 @@ describe('zev-input', () => {
 
     const input = shadowQuery<HTMLInputElement>(element, '.input');
     expect(input?.disabled).toBe(true);
+  });
+
+  it('should render label when provided', async () => {
+    element.label = 'Email';
+    await elementUpdated(element);
+
+    const label = shadowQuery<HTMLLabelElement>(element, '.input__label');
+    expect(label).toBeDefined();
+    expect(label?.textContent).toBe('Email');
+  });
+
+  it('should not render label when empty', async () => {
+    element.label = '';
+    await elementUpdated(element);
+
+    const label = shadowQuery<HTMLLabelElement>(element, '.input__label');
+    expect(label).toBeNull();
+  });
+
+  it('should render clear button when has value', async () => {
+    element.value = 'test';
+    await elementUpdated(element);
+
+    const clearBtn = shadowQuery<HTMLButtonElement>(element, '.input__clear');
+    expect(clearBtn).toBeDefined();
+  });
+
+  it('should not render clear button when empty', async () => {
+    element.value = '';
+    await elementUpdated(element);
+
+    const clearBtn = shadowQuery<HTMLButtonElement>(element, '.input__clear');
+    expect(clearBtn).toBeNull();
+  });
+
+  it('should not render clear button when disabled', async () => {
+    element.value = 'test';
+    element.disabled = true;
+    await elementUpdated(element);
+
+    const clearBtn = shadowQuery<HTMLButtonElement>(element, '.input__clear');
+    expect(clearBtn).toBeNull();
+  });
+
+  it('should clear value and emit events on clear button click', async () => {
+    element.value = 'test';
+    await elementUpdated(element);
+
+    const clearHandler = vi.fn();
+    const changeHandler = vi.fn();
+    element.addEventListener('input-clear', clearHandler);
+    element.addEventListener('input-change', changeHandler);
+
+    const clearBtn = shadowQuery<HTMLButtonElement>(element, '.input__clear');
+    clearBtn?.click();
+
+    expect(element.value).toBe('');
+    expect(clearHandler).toHaveBeenCalled();
+    expect(changeHandler).toHaveBeenCalled();
+    expect(changeHandler.mock.calls[0][0].detail).toEqual({ value: '' });
+  });
+
+  it('should add input--with-clear class when has value', async () => {
+    element.value = 'test';
+    await elementUpdated(element);
+
+    const input = shadowQuery<HTMLInputElement>(element, '.input');
+    expect(input?.classList.contains('input--with-clear')).toBe(true);
   });
 });

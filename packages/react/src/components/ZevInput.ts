@@ -9,5 +9,6 @@ export const ZevInput = createComponent({
   react: React,
   events: {
     onInputChange: 'input-change' as EventName<CustomEvent<{ value: string }>>,
+    onInputClear: 'input-clear' as EventName<CustomEvent<Record<string, never>>>,
   },
 });

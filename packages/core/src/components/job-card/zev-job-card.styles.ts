@@ -3,6 +3,7 @@ import { css } from 'lit';
 export const styles = css`
   :host {
     display: block;
+    height: 100%;
   }
 
   .job-card {
@@ -15,6 +16,9 @@ export const styles = css`
     border-radius: 8px;
     cursor: pointer;
     transition: var(--zev-transition-base);
+    height: 100%;
+    min-height: 220px;
+    box-sizing: border-box;
   }
 
   .job-card:hover {
@@ -74,6 +78,8 @@ export const styles = css`
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    flex: 1;
+    align-content: flex-start;
   }
 
   .job-card__footer {

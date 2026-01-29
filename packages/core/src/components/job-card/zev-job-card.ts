@@ -94,15 +94,11 @@ export class ZevJobCard extends ZevBase {
             : nothing}
         </div>
 
-        ${this.tags.length > 0
-          ? html`
-              <div class="job-card__tags">
-                ${this.tags.slice(0, 5).map(
-                  tag => html`<zev-tag label=${tag} size="small"></zev-tag>`
-                )}
-              </div>
-            `
-          : nothing}
+        <div class="job-card__tags">
+          ${this.tags.slice(0, 5).map(
+            tag => html`<zev-tag label=${tag} size="small"></zev-tag>`
+          )}
+        </div>
 
         <div class="job-card__footer">
           <span class="job-card__posted">${this.postedAt}</span>

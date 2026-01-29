@@ -30,6 +30,7 @@ describe('zev-select', () => {
     expect(element.value).toBe('');
     expect(element.placeholder).toBe('Selecione uma opção');
     expect(element.disabled).toBe(false);
+    expect(element.label).toBe('');
   });
 
   it('should render placeholder', async () => {
@@ -107,5 +108,22 @@ describe('zev-select', () => {
   it('should render chevron icon', () => {
     const chevron = shadowQuery<SVGElement>(element, '.select__chevron');
     expect(chevron).toBeDefined();
+  });
+
+  it('should render label when provided', async () => {
+    element.label = 'Tecnologia';
+    await elementUpdated(element);
+
+    const label = shadowQuery<HTMLLabelElement>(element, '.select__label');
+    expect(label).toBeDefined();
+    expect(label?.textContent).toBe('Tecnologia');
+  });
+
+  it('should not render label when empty', async () => {
+    element.label = '';
+    await elementUpdated(element);
+
+    const label = shadowQuery<HTMLLabelElement>(element, '.select__label');
+    expect(label).toBeNull();
   });
 });

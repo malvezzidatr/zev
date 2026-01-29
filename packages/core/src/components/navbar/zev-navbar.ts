@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ZevBase } from '../../base/zev-base.js';
@@ -17,6 +17,7 @@ export class ZevNavbar extends ZevBase {
   @property({ type: Array }) links: NavLink[] = [];
   @property() lang = 'pt';
   @property({ attribute: 'lang-label' }) langLabel = 'EN';
+  @property({ type: Boolean, attribute: 'show-lang-toggle' }) showLangToggle = true;
 
   @state() private _menuOpen = false;
 
@@ -41,9 +42,11 @@ export class ZevNavbar extends ZevBase {
           <a class="navbar__logo" href="#">${this.logo}</a>
 
           <div class="navbar__actions">
-            <button class="navbar__lang-toggle" @click=${this._handleLangToggle}>
-              ${this.langLabel}
-            </button>
+            ${this.showLangToggle ? html`
+              <button class="navbar__lang-toggle" @click=${this._handleLangToggle}>
+                ${this.langLabel}
+              </button>
+            ` : nothing}
 
             <div class=${classMap({
               'navbar__links': true,

@@ -109,4 +109,18 @@ describe('zev-navbar', () => {
 
     expect(handler).toHaveBeenCalled();
   });
+
+  it('should show lang toggle by default', async () => {
+    expect(element.showLangToggle).toBe(true);
+    const langToggle = shadowQuery<HTMLButtonElement>(element, '.navbar__lang-toggle');
+    expect(langToggle).not.toBeNull();
+  });
+
+  it('should hide lang toggle when showLangToggle is false', async () => {
+    element.showLangToggle = false;
+    await elementUpdated(element);
+
+    const langToggle = shadowQuery<HTMLButtonElement>(element, '.navbar__lang-toggle');
+    expect(langToggle).toBeNull();
+  });
 });

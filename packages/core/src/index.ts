@@ -48,10 +48,16 @@ export type { InputIcon } from './components/input/zev-input.js';
 export { ZevSelect } from './components/select/zev-select.js';
 export type { SelectOption } from './components/select/zev-select.js';
 
+export { ZevMultiSelect } from './components/multi-select/zev-multi-select.js';
+export type { MultiSelectOption } from './components/multi-select/zev-multi-select.js';
+
 export { ZevEmptyState } from './components/empty-state/zev-empty-state.js';
 
 export { ZevPagination } from './components/pagination/zev-pagination.js';
 
 export { ZevJobCard } from './components/job-card/zev-job-card.js';
+
+export { ZevStickySidebar } from './components/sticky-sidebar/zev-sticky-sidebar.js';
+export type { SidebarVariant } from './components/sticky-sidebar/zev-sticky-sidebar.js';
 
 export { ZevBase } from './base/zev-base.js';

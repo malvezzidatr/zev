@@ -6,13 +6,17 @@ import { styles } from './zev-input.styles.js';
 export type InputIcon = 'search' | 'filter' | 'none';
 
 /**
- * Input component with optional icon
+ * Input component with optional icon and clear button
  * @element zev-input
  * @fires input-change - Fired when the input value changes
+ * @fires input-clear - Fired when the clear button is clicked
  */
 @customElement('zev-input')
 export class ZevInput extends ZevBase {
   static styles = [...ZevBase.styles, styles];
+
+  /** Label text displayed above the input */
+  @property() label = '';
 
   /** Placeholder text */
   @property() placeholder = '';
@@ -30,6 +34,12 @@ export class ZevInput extends ZevBase {
     const input = e.target as HTMLInputElement;
     this.value = input.value;
     this.emitEvent('input-change', { value: this.value });
+  }
+
+  private _handleClear() {
+    this.value = '';
+    this.emitEvent('input-clear', {});
+    this.emitEvent('input-change', { value: '' });
   }
 
   private _renderIcon() {
@@ -54,20 +64,48 @@ export class ZevInput extends ZevBase {
     return nothing;
   }
 
-  render() {
-    const hasIcon = this.icon !== 'none';
+  private _renderClearButton() {
+    if (!this.value || this.disabled) return nothing;
 
     return html`
-      <div class="input-wrapper">
-        ${this._renderIcon()}
-        <input
-          type="text"
-          class="input ${hasIcon ? 'input--with-icon' : ''}"
-          .value=${this.value}
-          placeholder=${this.placeholder}
-          ?disabled=${this.disabled}
-          @input=${this._handleInput}
-        />
+      <button
+        type="button"
+        class="input__clear"
+        @click=${this._handleClear}
+        aria-label="Limpar campo"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    `;
+  }
+
+  private _renderLabel() {
+    if (!this.label) return nothing;
+
+    return html`<label class="input__label">${this.label}</label>`;
+  }
+
+  render() {
+    const hasIcon = this.icon !== 'none';
+    const hasClear = !!this.value && !this.disabled;
+
+    return html`
+      <div class="input-container">
+        ${this._renderLabel()}
+        <div class="input-wrapper">
+          ${this._renderIcon()}
+          <input
+            type="text"
+            class="input ${hasIcon ? 'input--with-icon' : ''} ${hasClear ? 'input--with-clear' : ''}"
+            .value=${this.value}
+            placeholder=${this.placeholder}
+            ?disabled=${this.disabled}
+            @input=${this._handleInput}
+          />
+          ${this._renderClearButton()}
+        </div>
       </div>
     `;
   }

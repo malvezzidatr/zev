@@ -10,7 +10,7 @@ import '@malvezzidatr/zev-core';
  *
  * ### Características
  * - Posição fixa no topo com `backdrop-filter: blur(10px)`
- * - Toggle de idioma com hover azul
+ * - Toggle de idioma opcional com hover azul
  * - Links com underline animado no hover
  * - Menu hamburger em telas < 768px com slide-in lateral
  *
@@ -43,6 +43,11 @@ export default {
       control: 'object',
       description: 'Array de links de navegação `{ label, href }`',
     },
+    showLangToggle: {
+      control: 'boolean',
+      description: 'Se o botão de alternar idioma está visível',
+      table: { defaultValue: { summary: 'true' } },
+    },
   },
 };
 
@@ -51,6 +56,7 @@ export const Default = {
     logo: 'CM',
     lang: 'pt',
     langLabel: 'EN',
+    showLangToggle: true,
     links: [
       { label: 'About', href: '#about' },
       { label: 'Projects', href: '#projects' },
@@ -62,6 +68,7 @@ export const Default = {
       .logo=${args.logo}
       .lang=${args.lang}
       .langLabel=${args.langLabel}
+      .showLangToggle=${args.showLangToggle}
       .links=${args.links}
       @lang-toggle=${(e: CustomEvent) => action('lang-toggle')(e.detail)}
       @nav-click=${(e: CustomEvent) => action('nav-click')(e.detail)}
@@ -114,5 +121,24 @@ export const CustomLogo = {
       @lang-toggle=${(e: CustomEvent) => action('lang-toggle')(e.detail)}
       @nav-click=${(e: CustomEvent) => action('nav-click')(e.detail)}
     ></zev-navbar>
+  `,
+};
+
+export const WithoutLangToggle = {
+  name: 'Sem Toggle de Idioma',
+  render: () => html`
+    <zev-navbar
+      logo="ZEV"
+      .showLangToggle=${false}
+      .links=${[
+        { label: 'Home', href: '#home' },
+        { label: 'Docs', href: '#docs' },
+        { label: 'Components', href: '#components' },
+      ]}
+      @nav-click=${(e: CustomEvent) => action('nav-click')(e.detail)}
+    ></zev-navbar>
+    <div style="height: 200vh; padding: 6rem 2rem;">
+      <p style="color: #888;">Navbar sem o botão de troca de idioma.</p>
+    </div>
   `,
 };
