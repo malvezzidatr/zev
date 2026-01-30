@@ -69,4 +69,9 @@ export type { UploadedFile } from './components/file-upload/zev-file-upload.js';
 export { ZevProgressBar } from './components/progress-bar/zev-progress-bar.js';
 export type { ProgressBarVariant, ProgressBarSize } from './components/progress-bar/zev-progress-bar.js';
 
+export { ZevCarousel } from './components/carousel/zev-carousel.js';
+export type { CarouselGap } from './components/carousel/zev-carousel.js';
+
+export { ZevCarouselItem } from './components/carousel/zev-carousel-item.js';
+
 export { ZevBase } from './base/zev-base.js';
