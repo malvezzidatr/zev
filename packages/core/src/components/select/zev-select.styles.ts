@@ -17,7 +17,8 @@ export const styles = css`
 
   .select {
     width: 100%;
-    padding: 1rem 2.5rem 1rem 1rem;
+    min-height: 3.5rem;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
     font-family: var(--zev-font-primary);
     font-size: var(--zev-fs-body);
     color: var(--zev-color-text-primary);
