@@ -1,6 +1,6 @@
 {
   "name": "@malvezzidatr/zev-react",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "React wrappers for Zev Design System",
   "author": "malvezzidatr",
   "license": "MIT",
@@ -30,7 +30,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@malvezzidatr/zev-core": "^0.7.3",
+    "@malvezzidatr/zev-core": "^0.7.4",
     "@lit/react": "^1.0.6"
   },
   "peerDependencies": {

@@ -19,9 +19,9 @@ export const styles = css`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.375rem;
     min-height: 3.5rem;
-    padding: 1rem 2.5rem 1rem 1rem;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
     background: var(--zev-color-bg-primary);
     border: 1px solid var(--zev-color-border-tag);
     border-radius: 4px;
