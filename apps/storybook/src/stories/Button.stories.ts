@@ -8,7 +8,7 @@ import '@malvezzidatr/zev-core';
  * Componente de botão com múltiplas variantes e tamanhos.
  *
  * ### Características
- * - 3 variantes: primary, secondary, ghost
+ * - 4 variantes: primary, secondary, ghost, outline-light
  * - 3 tamanhos: sm, md, lg
  * - Estado disabled
  * - Suporta conteúdo via slot
@@ -23,7 +23,7 @@ export default {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'ghost'],
+      options: ['primary', 'secondary', 'ghost', 'outline-light'],
       description: 'Variante visual do botão',
       table: { defaultValue: { summary: 'primary' } },
     },
@@ -78,6 +78,28 @@ export const Variants = {
   `,
 };
 
+export const OutlineLight = {
+  name: 'Outline Light (para fundos coloridos)',
+  render: () => html`
+    <div style="padding: 2rem; background: linear-gradient(135deg, #f97316, #fb923c); border-radius: 8px;">
+      <p style="margin-bottom: 1rem; font-family: var(--zev-font-primary); color: #fff; font-size: 0.875rem;">
+        Use esta variante em fundos coloridos ou imagens
+      </p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <zev-button variant="outline-light" size="sm" @button-click=${(e: CustomEvent) => action('button-click')(e.detail)}>
+          Ver Detalhes
+        </zev-button>
+        <zev-button variant="outline-light" size="md" @button-click=${(e: CustomEvent) => action('button-click')(e.detail)}>
+          Ver Detalhes
+        </zev-button>
+        <zev-button variant="outline-light" size="lg" @button-click=${(e: CustomEvent) => action('button-click')(e.detail)}>
+          Ver Detalhes
+        </zev-button>
+      </div>
+    </div>
+  `,
+};
+
 export const Sizes = {
   name: 'Tamanhos',
   render: () => html`
@@ -92,10 +114,13 @@ export const Sizes = {
 export const Disabled = {
   name: 'Desabilitado',
   render: () => html`
-    <div style="padding: 2rem; background: var(--zev-color-bg-primary); display: flex; gap: 1rem; flex-wrap: wrap;">
+    <div style="padding: 2rem; background: var(--zev-color-bg-primary); display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
       <zev-button variant="primary" disabled>Primary Disabled</zev-button>
       <zev-button variant="secondary" disabled>Secondary Disabled</zev-button>
       <zev-button variant="ghost" disabled>Ghost Disabled</zev-button>
+    </div>
+    <div style="padding: 2rem; background: linear-gradient(135deg, #f97316, #fb923c); border-radius: 8px;">
+      <zev-button variant="outline-light" disabled>Outline Light Disabled</zev-button>
     </div>
   `,
 };
@@ -103,7 +128,7 @@ export const Disabled = {
 export const AllCombinations = {
   name: 'Todas as Combinações',
   render: () => html`
-    <div style="padding: 2rem; background: var(--zev-color-bg-primary);">
+    <div style="padding: 2rem; background: var(--zev-color-bg-primary); margin-bottom: 1rem;">
       <div style="display: grid; grid-template-columns: repeat(3, auto); gap: 1rem; align-items: center; justify-items: start;">
         <!-- Headers -->
         <div style="font-family: var(--zev-font-primary); font-weight: bold; color: var(--zev-color-text-secondary);">Small</div>
@@ -124,6 +149,14 @@ export const AllCombinations = {
         <zev-button variant="ghost" size="sm">Ghost</zev-button>
         <zev-button variant="ghost" size="md">Ghost</zev-button>
         <zev-button variant="ghost" size="lg">Ghost</zev-button>
+      </div>
+    </div>
+    <div style="padding: 2rem; background: linear-gradient(135deg, #f97316, #fb923c); border-radius: 8px;">
+      <div style="display: grid; grid-template-columns: repeat(3, auto); gap: 1rem; align-items: center; justify-items: start;">
+        <!-- Outline Light -->
+        <zev-button variant="outline-light" size="sm">Outline Light</zev-button>
+        <zev-button variant="outline-light" size="md">Outline Light</zev-button>
+        <zev-button variant="outline-light" size="lg">Outline Light</zev-button>
       </div>
     </div>
   `,

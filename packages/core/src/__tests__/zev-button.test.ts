@@ -48,6 +48,14 @@ describe('zev-button', () => {
     expect(button?.classList.contains('btn--ghost')).toBe(true);
   });
 
+  it('should apply outline-light variant class', async () => {
+    element.variant = 'outline-light';
+    await elementUpdated(element);
+
+    const button = shadowQuery<HTMLButtonElement>(element, '.btn');
+    expect(button?.classList.contains('btn--outline-light')).toBe(true);
+  });
+
   it('should apply sm size class', async () => {
     element.size = 'sm';
     await elementUpdated(element);

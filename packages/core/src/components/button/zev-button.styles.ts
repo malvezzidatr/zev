@@ -69,6 +69,17 @@ export const styles = css`
     background: var(--zev-color-bg-secondary);
   }
 
+  /* Outline Light variant - for colored backgrounds */
+  .btn--outline-light {
+    background: transparent;
+    border: 1px solid #fff;
+    color: var(--zev-color-bg-primary);
+  }
+
+  .btn--outline-light:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
   /* Disabled state */
   .btn:disabled,
   :host([disabled]) .btn {

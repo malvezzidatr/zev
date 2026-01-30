@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ZevBase } from '../../base/zev-base.js';
 import { styles } from './zev-button.styles.js';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline-light';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 /**
@@ -40,6 +40,7 @@ export class ZevButton extends ZevBase {
       'btn--primary': this.variant === 'primary',
       'btn--secondary': this.variant === 'secondary',
       'btn--ghost': this.variant === 'ghost',
+      'btn--outline-light': this.variant === 'outline-light',
       'btn--sm': this.size === 'sm',
       'btn--md': this.size === 'md',
       'btn--lg': this.size === 'lg',
