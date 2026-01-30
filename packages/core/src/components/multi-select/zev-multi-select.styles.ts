@@ -9,14 +9,6 @@ export const styles = css`
   .multi-select-container {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .multi-select__label {
-    font-family: var(--zev-font-primary);
-    font-size: var(--zev-fs-small);
-    font-weight: 500;
-    color: var(--zev-color-text-primary);
   }
 
   .multi-select-wrapper {
@@ -29,7 +21,7 @@ export const styles = css`
     flex-wrap: wrap;
     gap: 0.5rem;
     min-height: 2.75rem;
-    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    padding: 0.75rem 2.5rem 0.75rem 0.75rem;
     background: var(--zev-color-bg-primary);
     border: 1px solid var(--zev-color-border-tag);
     border-radius: 4px;
@@ -55,10 +47,37 @@ export const styles = css`
     border-color: var(--zev-color-border-tag);
   }
 
-  .multi-select__placeholder {
-    color: var(--zev-color-text-secondary);
+  /* Floating label styles */
+  .multi-select__label {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
     font-family: var(--zev-font-primary);
     font-size: var(--zev-fs-body);
+    color: var(--zev-color-text-secondary);
+    background: var(--zev-color-bg-primary);
+    padding: 0 0.25rem;
+    pointer-events: none;
+    transition: all 0.15s ease;
+    z-index: 1;
+  }
+
+  /* Label floats up when has value */
+  .multi-select__trigger--has-value ~ .multi-select__label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: var(--zev-fs-small);
+    color: var(--zev-color-text-secondary);
+  }
+
+  /* Label color changes on open */
+  .multi-select__trigger--open ~ .multi-select__label {
+    color: var(--zev-color-accent);
+  }
+
+  .multi-select__trigger--has-value.multi-select__trigger--open ~ .multi-select__label {
+    color: var(--zev-color-accent);
   }
 
   .multi-select__tags {
@@ -216,7 +235,14 @@ export const styles = css`
     font-size: var(--zev-fs-body);
   }
 
-  :host([disabled]) .multi-select__label {
+  /* Disabled state */
+  :host([disabled]) .multi-select__trigger {
     opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--zev-color-bg-secondary);
+  }
+
+  :host([disabled]) .multi-select__label {
+    background: var(--zev-color-bg-secondary);
   }
 `;

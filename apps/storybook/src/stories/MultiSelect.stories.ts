@@ -8,7 +8,9 @@ import '@malvezzidatr/zev-core';
  * Componente de select com seleção múltipla usando tags.
  *
  * ### Características
- * - Label opcional acima do componente
+ * - Floating label no estilo Material Design outlined
+ * - Label atua como placeholder quando vazio
+ * - Label flutua para a borda quando há valores selecionados
  * - Seleção múltipla com tags removíveis
  * - Campo de busca para filtrar opções
  * - Limite configurável de tags visíveis (mostra +N)
@@ -25,13 +27,8 @@ export default {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Label exibida acima do select',
+      description: 'Floating label (estilo outlined)',
       table: { defaultValue: { summary: '' } },
-    },
-    placeholder: {
-      control: 'text',
-      description: 'Texto placeholder quando nada selecionado',
-      table: { defaultValue: { summary: 'Selecione uma opção' } },
     },
     searchPlaceholder: {
       control: 'text',
@@ -77,8 +74,7 @@ const defaultOptions = [
 
 export const Default = {
   args: {
-    label: 'Multi-select',
-    placeholder: 'Choose a tag',
+    label: 'Tags',
     searchPlaceholder: 'Search',
     disabled: false,
     searchable: true,
@@ -90,7 +86,6 @@ export const Default = {
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-multi-select
         label=${args.label}
-        placeholder=${args.placeholder}
         searchPlaceholder=${args.searchPlaceholder}
         ?disabled=${args.disabled}
         ?searchable=${args.searchable}
@@ -104,13 +99,36 @@ export const Default = {
   `,
 };
 
+export const FloatingLabel = {
+  name: 'Floating Label',
+  render: () => html`
+    <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
+      <p style="margin-bottom: 1rem; font-family: var(--zev-font-primary); color: var(--zev-color-text-secondary); font-size: 0.875rem;">
+        Clique no campo para ver a label flutuar ao selecionar valores
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <zev-multi-select
+          label="Tags"
+          .options=${defaultOptions}
+          @multi-select-change=${(e: CustomEvent) => action('multi-select-change')(e.detail)}
+        ></zev-multi-select>
+        <zev-multi-select
+          label="Tags"
+          .options=${defaultOptions}
+          .value=${['family', 'friends']}
+          @multi-select-change=${(e: CustomEvent) => action('multi-select-change')(e.detail)}
+        ></zev-multi-select>
+      </div>
+    </div>
+  `,
+};
+
 export const WithSelectedValues = {
   name: 'Com Valores Selecionados',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-multi-select
-        label="Multi-select"
-        placeholder="Choose a tag"
+        label="Tags"
         .options=${defaultOptions}
         .value=${['family', 'family-in-law', 'coworkers']}
         @multi-select-change=${(e: CustomEvent) => action('multi-select-change')(e.detail)}
@@ -124,8 +142,7 @@ export const WithManySelected = {
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-multi-select
-        label="Multi-select"
-        placeholder="Choose a tag"
+        label="Tags"
         maxDisplayTags="3"
         .options=${defaultOptions}
         .value=${['family', 'family-in-law', 'coworkers', 'friends', 'hockey-club']}
@@ -144,7 +161,6 @@ export const WithoutSearch = {
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-multi-select
         label="Tags"
-        placeholder="Selecione tags"
         .searchable=${false}
         .options=${defaultOptions}
         @multi-select-change=${(e: CustomEvent) => action('multi-select-change')(e.detail)}
@@ -157,13 +173,19 @@ export const Disabled = {
   name: 'Desabilitado',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
-      <zev-multi-select
-        label="Multi-select"
-        placeholder="Select desabilitado"
-        disabled
-        .options=${defaultOptions}
-        .value=${['family', 'friends']}
-      ></zev-multi-select>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <zev-multi-select
+          label="Tags desabilitado"
+          disabled
+          .options=${defaultOptions}
+        ></zev-multi-select>
+        <zev-multi-select
+          label="Tags com valor"
+          disabled
+          .options=${defaultOptions}
+          .value=${['family', 'friends']}
+        ></zev-multi-select>
+      </div>
     </div>
   `,
 };
@@ -174,7 +196,6 @@ export const Technologies = {
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-multi-select
         label="Tecnologias"
-        placeholder="Selecione as tecnologias"
         searchPlaceholder="Buscar tecnologia..."
         .options=${[
           { value: 'react', label: 'React' },
@@ -211,7 +232,6 @@ export const JobFilters = {
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
           <zev-multi-select
             label="Tecnologias"
-            placeholder="Todas"
             .options=${[
               { value: 'react', label: 'React' },
               { value: 'vue', label: 'Vue.js' },
@@ -223,7 +243,6 @@ export const JobFilters = {
           ></zev-multi-select>
           <zev-multi-select
             label="Modalidade"
-            placeholder="Todas"
             .options=${[
               { value: 'remote', label: 'Remoto' },
               { value: 'hybrid', label: 'Híbrido' },
@@ -233,7 +252,6 @@ export const JobFilters = {
           ></zev-multi-select>
           <zev-multi-select
             label="Senioridade"
-            placeholder="Todas"
             .options=${[
               { value: 'junior', label: 'Júnior' },
               { value: 'mid', label: 'Pleno' },

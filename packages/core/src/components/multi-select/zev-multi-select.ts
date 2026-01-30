@@ -21,11 +21,8 @@ export interface MultiSelectOption {
 export class ZevMultiSelect extends ZevBase {
   static styles = [...ZevBase.styles, styles];
 
-  /** Label text displayed above the select */
+  /** Floating label text */
   @property() label = '';
-
-  /** Placeholder text when nothing is selected */
-  @property() placeholder = 'Selecione uma opção';
 
   /** Array of available options */
   @property({ type: Array }) options: MultiSelectOption[] = [];
@@ -133,7 +130,7 @@ export class ZevMultiSelect extends ZevBase {
   private _renderTags() {
     const selected = this._selectedOptions;
     if (selected.length === 0) {
-      return html`<span class="multi-select__placeholder">${this.placeholder}</span>`;
+      return nothing;
     }
 
     const visibleTags = selected.slice(0, this.maxDisplayTags);
@@ -223,10 +220,13 @@ export class ZevMultiSelect extends ZevBase {
   }
 
   render() {
+    const hasValue = this.value.length > 0;
+
     const triggerClasses = {
       'multi-select__trigger': true,
       'multi-select__trigger--open': this._isOpen,
       'multi-select__trigger--disabled': this.disabled,
+      'multi-select__trigger--has-value': hasValue,
     };
 
     const chevronClasses = {
@@ -236,7 +236,6 @@ export class ZevMultiSelect extends ZevBase {
 
     return html`
       <div class="multi-select-container">
-        ${this._renderLabel()}
         <div class="multi-select-wrapper">
           <div
             class=${classMap(triggerClasses)}
@@ -247,6 +246,7 @@ export class ZevMultiSelect extends ZevBase {
               <path d="M7 10l5 5 5-5z"/>
             </svg>
           </div>
+          ${this._renderLabel()}
           ${this._renderDropdown()}
         </div>
       </div>

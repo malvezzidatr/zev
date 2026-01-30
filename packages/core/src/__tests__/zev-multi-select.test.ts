@@ -29,7 +29,6 @@ describe('zev-multi-select', () => {
   it('should render with default values', () => {
     expect(element.options).toEqual([]);
     expect(element.value).toEqual([]);
-    expect(element.placeholder).toBe('Selecione uma opção');
     expect(element.disabled).toBe(false);
     expect(element.searchable).toBe(true);
     expect(element.maxDisplayTags).toBe(3);
@@ -53,13 +52,29 @@ describe('zev-multi-select', () => {
     expect(label).toBeNull();
   });
 
-  it('should render placeholder when no value selected', async () => {
-    element.placeholder = 'Choose tags';
+  it('should render floating label inside trigger when no value', async () => {
+    element.label = 'Tags';
     element.options = testOptions;
     await elementUpdated(element);
 
-    const placeholder = shadowQuery<HTMLSpanElement>(element, '.multi-select__placeholder');
-    expect(placeholder?.textContent).toBe('Choose tags');
+    const label = shadowQuery<HTMLLabelElement>(element, '.multi-select__label');
+    expect(label).toBeDefined();
+    expect(label?.textContent).toBe('Tags');
+
+    // Trigger should not have --has-value class
+    const trigger = shadowQuery<HTMLDivElement>(element, '.multi-select__trigger');
+    expect(trigger?.classList.contains('multi-select__trigger--has-value')).toBe(false);
+  });
+
+  it('should float label when has selected values', async () => {
+    element.label = 'Tags';
+    element.options = testOptions;
+    element.value = ['family'];
+    await elementUpdated(element);
+
+    // Trigger should have --has-value class
+    const trigger = shadowQuery<HTMLDivElement>(element, '.multi-select__trigger');
+    expect(trigger?.classList.contains('multi-select__trigger--has-value')).toBe(true);
   });
 
   it('should open dropdown on click', async () => {
