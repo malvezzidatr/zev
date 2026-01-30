@@ -28,17 +28,17 @@ describe('zev-select', () => {
   it('should render with default values', () => {
     expect(element.options).toEqual([]);
     expect(element.value).toBe('');
-    expect(element.placeholder).toBe('Selecione uma opção');
     expect(element.disabled).toBe(false);
     expect(element.label).toBe('');
   });
 
-  it('should render placeholder', async () => {
-    element.placeholder = 'Choose option';
+  it('should have empty option for initial state', async () => {
+    element.options = testOptions;
     await elementUpdated(element);
 
-    const placeholderOption = shadowQuery<HTMLOptionElement>(element, 'option[value=""]');
-    expect(placeholderOption?.textContent?.trim()).toBe('Choose option');
+    const emptyOption = shadowQuery<HTMLOptionElement>(element, 'option[value=""]');
+    expect(emptyOption).toBeDefined();
+    expect(emptyOption?.textContent?.trim()).toBe('');
   });
 
   it('should render options', async () => {

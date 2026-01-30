@@ -6,16 +6,7 @@ export const styles = css`
   }
 
   .input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .input__label {
-    font-family: var(--zev-font-primary);
-    font-size: var(--zev-fs-small);
-    font-weight: 500;
-    color: var(--zev-color-text-primary);
+    position: relative;
   }
 
   .input-wrapper {
@@ -26,18 +17,18 @@ export const styles = css`
 
   .input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 1rem 1rem;
     font-family: var(--zev-font-primary);
     font-size: var(--zev-fs-body);
     color: var(--zev-color-text-primary);
-    background: var(--zev-color-bg-primary);
+    background: transparent;
     border: 1px solid var(--zev-color-border-tag);
     border-radius: 4px;
-    transition: var(--zev-transition-base);
+    transition: border-color 0.15s ease;
   }
 
   .input::placeholder {
-    color: var(--zev-color-text-secondary);
+    color: transparent;
   }
 
   .input:focus {
@@ -45,8 +36,44 @@ export const styles = css`
     border-color: var(--zev-color-accent);
   }
 
+  /* Floating label */
+  .input__label {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--zev-font-primary);
+    font-size: var(--zev-fs-body);
+    color: var(--zev-color-text-secondary);
+    background: var(--zev-color-bg-primary);
+    padding: 0 0.25rem;
+    pointer-events: none;
+    transition: all 0.15s ease;
+  }
+
+  /* Label floats up only when has value */
+  .input--has-value ~ .input__label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: var(--zev-fs-small);
+    color: var(--zev-color-text-secondary);
+  }
+
+  .input:focus ~ .input__label {
+    color: var(--zev-color-accent);
+  }
+
+  .input--has-value:focus ~ .input__label {
+    color: var(--zev-color-accent);
+  }
+
+  /* With icon adjustments */
   .input--with-icon {
     padding-left: 2.75rem;
+  }
+
+  .input--with-icon ~ .input__label {
+    left: 2.5rem;
   }
 
   .input--with-clear {
@@ -60,10 +87,10 @@ export const styles = css`
     height: 1.25rem;
     fill: var(--zev-color-text-secondary);
     pointer-events: none;
+    transition: fill 0.15s ease;
   }
 
-  .input:focus ~ .input__icon,
-  .input:focus + .input__icon {
+  .input:focus ~ .input__icon {
     fill: var(--zev-color-accent);
   }
 
@@ -80,14 +107,14 @@ export const styles = css`
     background: transparent;
     cursor: pointer;
     border-radius: 50%;
-    transition: var(--zev-transition-base);
+    transition: background 0.15s ease;
   }
 
   .input__clear svg {
     width: 1rem;
     height: 1rem;
     fill: var(--zev-color-text-secondary);
-    transition: var(--zev-transition-base);
+    transition: fill 0.15s ease;
   }
 
   .input__clear:hover {
@@ -98,6 +125,7 @@ export const styles = css`
     fill: var(--zev-color-text-primary);
   }
 
+  /* Disabled state */
   .input:disabled {
     opacity: 0.5;
     cursor: not-allowed;

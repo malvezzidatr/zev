@@ -15,7 +15,7 @@ export type InputIcon = 'search' | 'filter' | 'none';
 export class ZevInput extends ZevBase {
   static styles = [...ZevBase.styles, styles];
 
-  /** Label text displayed above the input */
+  /** Label text displayed as floating label */
   @property() label = '';
 
   /** Placeholder text */
@@ -90,20 +90,21 @@ export class ZevInput extends ZevBase {
   render() {
     const hasIcon = this.icon !== 'none';
     const hasClear = !!this.value && !this.disabled;
+    const hasValue = !!this.value;
 
     return html`
       <div class="input-container">
-        ${this._renderLabel()}
         <div class="input-wrapper">
           ${this._renderIcon()}
           <input
             type="text"
-            class="input ${hasIcon ? 'input--with-icon' : ''} ${hasClear ? 'input--with-clear' : ''}"
+            class="input ${hasIcon ? 'input--with-icon' : ''} ${hasClear ? 'input--with-clear' : ''} ${hasValue ? 'input--has-value' : ''}"
             .value=${this.value}
-            placeholder=${this.placeholder}
+            placeholder=${this.placeholder || ' '}
             ?disabled=${this.disabled}
             @input=${this._handleInput}
           />
+          ${this._renderLabel()}
           ${this._renderClearButton()}
         </div>
       </div>

@@ -5,10 +5,10 @@ import '@malvezzidatr/zev-core';
 /**
  * ## zev-input
  *
- * Componente de input de texto com ícone opcional, label e botão de limpar.
+ * Componente de input de texto com floating label no estilo Material Design outlined.
  *
  * ### Características
- * - Label opcional acima do input
+ * - Floating label que sobe para a borda quando focado ou com valor
  * - Ícones opcionais: search, filter
  * - Botão X para limpar (aparece automaticamente quando há texto)
  * - Suporte a placeholder
@@ -25,7 +25,7 @@ export default {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Label exibida acima do input',
+      description: 'Floating label (estilo outlined)',
       table: { defaultValue: { summary: '' } },
     },
     placeholder: {
@@ -54,8 +54,8 @@ export default {
 
 export const Default = {
   args: {
-    label: '',
-    placeholder: 'Digite algo...',
+    label: 'Label',
+    placeholder: '',
     value: '',
     icon: 'none',
     disabled: false,
@@ -75,34 +75,38 @@ export const Default = {
   `,
 };
 
-export const WithLabel = {
-  name: 'Com Label',
+export const FloatingLabel = {
+  name: 'Floating Label',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
-      <zev-input
-        label="Email"
-        placeholder="Digite seu email..."
-        @input-change=${(e: CustomEvent) => action('input-change')(e.detail)}
-      ></zev-input>
+      <p style="margin-bottom: 1rem; font-family: var(--zev-font-primary); color: var(--zev-color-text-secondary); font-size: 0.875rem;">
+        Clique no campo para ver a label flutuar
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <zev-input
+          label="Email"
+          @input-change=${(e: CustomEvent) => action('input-change')(e.detail)}
+        ></zev-input>
+        <zev-input
+          label="Nome completo"
+          value="João Silva"
+          @input-change=${(e: CustomEvent) => action('input-change')(e.detail)}
+        ></zev-input>
+      </div>
     </div>
   `,
 };
 
-export const WithClearButton = {
-  name: 'Com Botão Limpar',
+export const WithValue = {
+  name: 'Com Valor',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-input
-        label="Busca"
-        placeholder="Digite para buscar..."
-        value="Texto exemplo"
-        icon="search"
+        label="Email"
+        value="usuario@email.com"
         @input-change=${(e: CustomEvent) => action('input-change')(e.detail)}
         @input-clear=${() => action('input-clear')()}
       ></zev-input>
-      <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--zev-color-text-secondary);">
-        O botão X aparece automaticamente quando há texto
-      </p>
     </div>
   `,
 };
@@ -112,7 +116,7 @@ export const WithSearchIcon = {
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-input
-        placeholder="Buscar vagas..."
+        label="Buscar"
         icon="search"
         @input-change=${(e: CustomEvent) => action('input-change')(e.detail)}
       ></zev-input>
@@ -125,7 +129,7 @@ export const WithFilterIcon = {
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-input
-        placeholder="Filtrar resultados..."
+        label="Filtrar"
         icon="filter"
         @input-change=${(e: CustomEvent) => action('input-change')(e.detail)}
       ></zev-input>
@@ -137,17 +141,23 @@ export const Disabled = {
   name: 'Desabilitado',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
-      <zev-input
-        placeholder="Input desabilitado"
-        value="Valor existente"
-        disabled
-      ></zev-input>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <zev-input
+          label="Campo desabilitado"
+          disabled
+        ></zev-input>
+        <zev-input
+          label="Campo com valor"
+          value="Valor existente"
+          disabled
+        ></zev-input>
+      </div>
     </div>
   `,
 };
 
-export const SearchFilter = {
-  name: 'Filtro de Busca',
+export const JobFilters = {
+  name: 'Filtros de Vagas',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary);">
       <div style="
@@ -160,24 +170,22 @@ export const SearchFilter = {
         border-radius: 8px;
       ">
         <h3 style="margin: 0; font-family: var(--zev-font-primary); color: var(--zev-color-text-primary);">
-          Filtros
+          Busca de Vagas
         </h3>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <zev-input
-            label="Buscar"
-            placeholder="Buscar por título..."
-            icon="search"
-            style="flex: 1; min-width: 200px;"
-            @input-change=${(e: CustomEvent) => action('search')(e.detail)}
-            @input-clear=${() => action('search-clear')()}
-          ></zev-input>
+        <zev-input
+          label="Buscar vagas por título, empresa ou descrição..."
+          icon="search"
+          @input-change=${(e: CustomEvent) => action('search')(e.detail)}
+          @input-clear=${() => action('search-clear')()}
+        ></zev-input>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
           <zev-input
             label="Local"
-            placeholder="Filtrar por local..."
-            icon="filter"
-            style="flex: 1; min-width: 200px;"
-            @input-change=${(e: CustomEvent) => action('filter')(e.detail)}
-            @input-clear=${() => action('filter-clear')()}
+            @input-change=${(e: CustomEvent) => action('local')(e.detail)}
+          ></zev-input>
+          <zev-input
+            label="Empresa"
+            @input-change=${(e: CustomEvent) => action('empresa')(e.detail)}
           ></zev-input>
         </div>
       </div>

@@ -9,7 +9,7 @@ export interface SelectOption {
 }
 
 /**
- * Select dropdown component with optional label
+ * Select dropdown component with floating label
  * @element zev-select
  * @fires select-change - Fired when the selection changes
  */
@@ -17,7 +17,7 @@ export interface SelectOption {
 export class ZevSelect extends ZevBase {
   static styles = [...ZevBase.styles, styles];
 
-  /** Label text displayed above the select */
+  /** Label text displayed as floating label */
   @property() label = '';
 
   /** Array of options */
@@ -25,9 +25,6 @@ export class ZevSelect extends ZevBase {
 
   /** Current selected value */
   @property() value = '';
-
-  /** Placeholder text */
-  @property() placeholder = 'Selecione uma opção';
 
   /** Whether the select is disabled */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -49,19 +46,18 @@ export class ZevSelect extends ZevBase {
   }
 
   render() {
+    const hasValue = !!this.value;
+
     return html`
       <div class="select-container">
-        ${this._renderLabel()}
         <div class="select-wrapper">
           <select
-            class="select"
+            class="select ${hasValue ? 'select--has-value' : ''}"
             .value=${this.value}
             ?disabled=${this.disabled}
             @change=${this._handleChange}
           >
-            <option value="" ?disabled=${!!this.value} ?selected=${!this.value}>
-              ${this.placeholder}
-            </option>
+            <option value="" ?disabled=${hasValue} ?selected=${!hasValue}></option>
             ${this.options.map(
               opt => html`
                 <option value=${opt.value} ?selected=${opt.value === this.value}>
@@ -70,6 +66,7 @@ export class ZevSelect extends ZevBase {
               `
             )}
           </select>
+          ${this._renderLabel()}
           <svg class="select__chevron" viewBox="0 0 24 24" fill="currentColor">
             <path d="M7 10l5 5 5-5z"/>
           </svg>

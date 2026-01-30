@@ -11,6 +11,30 @@ e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.7.1] - 2025-01-30
+
+### Changed
+
+#### @malvezzidatr/zev-core
+
+- **zev-input** e **zev-select** — Novo estilo "floating label" (Material Design outlined)
+  - Label fica dentro do campo quando vazio (atua como placeholder)
+  - Label flutua para a borda superior quando há valor selecionado
+  - Label NÃO flutua apenas com foco (somente quando há valor)
+  - Background da label "corta" a borda para efeito visual
+  - Cor do label muda para accent no foco
+
+- **zev-select** — Removida prop `placeholder`
+  - Label agora atua como placeholder nativo
+  - Opção vazia sem texto para estado inicial
+
+#### Storybook
+
+- Stories atualizadas para Input e Select com novo estilo floating label
+- Documentação atualizada mencionando o comportamento Material Design
+
+---
+
 ## [0.7.0] - 2025-01-30
 
 ### Added

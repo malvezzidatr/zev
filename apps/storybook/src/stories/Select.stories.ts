@@ -5,14 +5,13 @@ import '@malvezzidatr/zev-core';
 /**
  * ## zev-select
  *
- * Componente de select dropdown com label opcional.
+ * Componente de select dropdown com floating label no estilo Material Design outlined.
  *
  * ### Características
- * - Label opcional acima do select
+ * - Floating label que sobe para a borda quando focado ou com valor
  * - Recebe array de opções via prop
  * - Placeholder customizável
  * - Estado disabled
- * - Emite evento select-change ao selecionar
  *
  * ### Eventos
  * - `select-change`: Disparado ao selecionar, com `{ value, label }` no detail
@@ -24,13 +23,8 @@ export default {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Label exibida acima do select',
+      description: 'Floating label (estilo outlined)',
       table: { defaultValue: { summary: '' } },
-    },
-    placeholder: {
-      control: 'text',
-      description: 'Texto placeholder',
-      table: { defaultValue: { summary: 'Selecione uma opção' } },
     },
     value: {
       control: 'text',
@@ -58,8 +52,7 @@ const defaultOptions = [
 
 export const Default = {
   args: {
-    label: '',
-    placeholder: 'Selecione uma tecnologia',
+    label: 'Tecnologia',
     value: '',
     disabled: false,
     options: defaultOptions,
@@ -68,7 +61,6 @@ export const Default = {
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-select
         label=${args.label}
-        placeholder=${args.placeholder}
         value=${args.value}
         ?disabled=${args.disabled}
         .options=${args.options}
@@ -78,26 +70,36 @@ export const Default = {
   `,
 };
 
-export const WithLabel = {
-  name: 'Com Label',
+export const FloatingLabel = {
+  name: 'Floating Label',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
-      <zev-select
-        label="Tecnologia"
-        placeholder="Selecione uma tecnologia"
-        .options=${defaultOptions}
-        @select-change=${(e: CustomEvent) => action('select-change')(e.detail)}
-      ></zev-select>
+      <p style="margin-bottom: 1rem; font-family: var(--zev-font-primary); color: var(--zev-color-text-secondary); font-size: 0.875rem;">
+        Clique no campo para ver a label flutuar
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <zev-select
+          label="Tecnologia"
+          .options=${defaultOptions}
+          @select-change=${(e: CustomEvent) => action('select-change')(e.detail)}
+        ></zev-select>
+        <zev-select
+          label="Tecnologia"
+          value="vue"
+          .options=${defaultOptions}
+          @select-change=${(e: CustomEvent) => action('select-change')(e.detail)}
+        ></zev-select>
+      </div>
     </div>
   `,
 };
 
 export const WithValue = {
-  name: 'Com Valor Selecionado',
+  name: 'Com Valor',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
       <zev-select
-        placeholder="Selecione uma tecnologia"
+        label="Tecnologia"
         value="vue"
         .options=${defaultOptions}
         @select-change=${(e: CustomEvent) => action('select-change')(e.detail)}
@@ -110,11 +112,19 @@ export const Disabled = {
   name: 'Desabilitado',
   render: () => html`
     <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px;">
-      <zev-select
-        placeholder="Select desabilitado"
-        disabled
-        .options=${defaultOptions}
-      ></zev-select>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <zev-select
+          label="Select desabilitado"
+          disabled
+          .options=${defaultOptions}
+        ></zev-select>
+        <zev-select
+          label="Select com valor"
+          value="react"
+          disabled
+          .options=${defaultOptions}
+        ></zev-select>
+      </div>
     </div>
   `,
 };
@@ -127,7 +137,7 @@ export const JobFilters = {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        max-width: 600px;
+        max-width: 800px;
         padding: 1.5rem;
         border: 1px solid var(--zev-color-border-tag);
         border-radius: 8px;
@@ -137,8 +147,26 @@ export const JobFilters = {
         </h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
           <zev-select
+            label="Nível"
+            .options=${[
+              { value: 'junior', label: 'Júnior' },
+              { value: 'mid', label: 'Pleno' },
+              { value: 'senior', label: 'Sênior' },
+            ]}
+            @select-change=${(e: CustomEvent) => action('nivel')(e.detail)}
+          ></zev-select>
+          <zev-select
+            label="Área"
+            .options=${[
+              { value: 'frontend', label: 'Frontend' },
+              { value: 'backend', label: 'Backend' },
+              { value: 'fullstack', label: 'Full Stack' },
+              { value: 'mobile', label: 'Mobile' },
+            ]}
+            @select-change=${(e: CustomEvent) => action('area')(e.detail)}
+          ></zev-select>
+          <zev-select
             label="Modalidade"
-            placeholder="Selecione"
             .options=${[
               { value: 'remote', label: 'Remoto' },
               { value: 'hybrid', label: 'Híbrido' },
@@ -147,18 +175,7 @@ export const JobFilters = {
             @select-change=${(e: CustomEvent) => action('modalidade')(e.detail)}
           ></zev-select>
           <zev-select
-            label="Senioridade"
-            placeholder="Selecione"
-            .options=${[
-              { value: 'junior', label: 'Júnior' },
-              { value: 'mid', label: 'Pleno' },
-              { value: 'senior', label: 'Sênior' },
-            ]}
-            @select-change=${(e: CustomEvent) => action('senioridade')(e.detail)}
-          ></zev-select>
-          <zev-select
             label="Fonte"
-            placeholder="Selecione"
             .options=${[
               { value: 'github', label: 'GitHub Jobs' },
               { value: 'linkedin', label: 'LinkedIn' },
