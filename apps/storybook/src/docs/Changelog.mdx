@@ -11,6 +11,36 @@ e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.7.7] - 2025-01-30
+
+### Added
+
+#### @malvezzidatr/zev-core
+
+- **zev-skill-card** — Card educacional para exibir habilidades/competências com recursos de estudo
+  - Props: `title`, `badge` (differential/required/optional), `badgeLabel`, `importance`, `focusPoints`, `resources`
+  - Tipos de badge: `differential` (DIFERENCIAL), `required` (OBRIGATÓRIO), `optional` (OPCIONAL)
+  - Seção "Por que é importante" para contexto
+  - Seção "O que focar" para direcionamento de estudo
+  - Lista de recursos com tipos: `docs`, `video`, `article`, `course`
+  - Evento `resource-click` com `{ label, url, type }` ao clicar em recurso
+
+#### @malvezzidatr/zev-react
+
+- `ZevSkillCard` wrapper com evento `onResourceClick`
+- Export dos tipos: `SkillBadgeVariant`, `ResourceType`, `SkillResource`
+
+#### Storybook
+
+- Story `SkillCard` com 6 variantes (Default, Tipos de Badge, Com Recursos, Conteúdo Mínimo, Badge Customizado, Lista de Skills)
+
+### Tests
+
+- 15 novos testes unitários para `zev-skill-card`
+- Total: 365 testes passando
+
+---
+
 ## [0.7.6] - 2025-01-30
 
 ### Added

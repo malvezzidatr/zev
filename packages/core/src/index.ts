@@ -74,4 +74,7 @@ export type { CarouselGap } from './components/carousel/zev-carousel.js';
 
 export { ZevCarouselItem } from './components/carousel/zev-carousel-item.js';
 
+export { ZevSkillCard } from './components/skill-card/zev-skill-card.js';
+export type { SkillBadgeVariant, ResourceType, SkillResource } from './components/skill-card/zev-skill-card.js';
+
 export { ZevBase } from './base/zev-base.js';
