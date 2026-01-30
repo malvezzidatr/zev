@@ -20,8 +20,8 @@ export const styles = css`
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    min-height: 2.75rem;
-    padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+    min-height: 3.5rem;
+    padding: 1rem 2.5rem 1rem 1rem;
     background: var(--zev-color-bg-primary);
     border: 1px solid var(--zev-color-border-tag);
     border-radius: 4px;
@@ -50,7 +50,7 @@ export const styles = css`
   /* Floating label styles */
   .multi-select__label {
     position: absolute;
-    left: 0.75rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
     font-family: var(--zev-font-primary);

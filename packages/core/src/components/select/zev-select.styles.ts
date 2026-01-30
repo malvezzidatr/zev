@@ -37,7 +37,7 @@ export const styles = css`
   /* Floating label */
   .select__label {
     position: absolute;
-    left: 0.75rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
     font-family: var(--zev-font-primary);
