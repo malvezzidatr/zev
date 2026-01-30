@@ -5,6 +5,42 @@ Todas as mudanças notáveis do projeto serão documentadas neste arquivo.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [0.7.0] - 2025-01-30
+
+### Added
+
+#### @malvezzidatr/zev-core
+
+- **zev-carousel**: Carousel/slider para conteúdo em slides navegáveis
+  - Props: `slides-per-view` (1-5), `gap` (none/sm/md/lg), `loop`, `autoplay`, `autoplay-interval`, `hide-nav`, `hide-indicators`, `pause-on-hover`
+  - Evento: `carousel-change` com `{ index, previousIndex }`
+  - Navegação via botões anterior/próximo
+  - Indicadores (dots) clicáveis
+  - Suporte a múltiplos slides por view
+  - Loop infinito opcional
+  - Autoplay com pause on hover
+  - Drag/swipe para navegação
+  - Responsivo (mobile mostra 1 slide)
+
+- **zev-carousel-item**: Item wrapper para slides do carousel
+
+#### @malvezzidatr/zev-react
+
+- `ZevCarousel` wrapper com evento `onCarouselChange`
+- `ZevCarouselItem` wrapper
+- Export do tipo: `CarouselGap`
+
+#### Storybook
+
+- Story `Carousel` com 8 variantes (Default, Carousel de Imagens, Carousel de Cards, Carousel de Produtos, Com Autoplay, Sem Navegação, Apenas Indicadores, Carousel de Depoimentos)
+
+### Tests
+
+- 17 testes unitários para `zev-carousel` e `zev-carousel-item`
+- Total: 348 testes passando
+
+---
+
 ## [0.6.0] - 2025-01-29
 
 ### Added

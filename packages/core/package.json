@@ -1,6 +1,6 @@
 {
   "name": "@malvezzidatr/zev-core",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Core Web Components for Zev Design System",
   "author": "malvezzidatr",
   "license": "MIT",
@@ -33,7 +33,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@malvezzidatr/zev-tokens": "^0.6.0",
+    "@malvezzidatr/zev-tokens": "^0.7.0",
     "lit": "^3.2.0"
   },
   "devDependencies": {
