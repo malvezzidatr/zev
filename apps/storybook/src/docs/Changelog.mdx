@@ -11,33 +11,37 @@ e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
-## [0.7.7] - 2025-01-30
+## [0.7.8] - 2025-02-02
 
 ### Added
 
 #### @malvezzidatr/zev-core
 
-- **zev-skill-card** — Card educacional para exibir habilidades/competências com recursos de estudo
-  - Props: `title`, `badge` (differential/required/optional), `badgeLabel`, `importance`, `focusPoints`, `resources`
+- **zev-skill-card** — Accordion educacional para exibir habilidades/competências com recursos de estudo
+  - Comportamento de accordion (clique no header para expandir/colapsar)
+  - Props: `title`, `badge` (differential/required/optional), `badgeLabel`, `importance`, `focusPoints`, `resources`, `open`
   - Tipos de badge: `differential` (DIFERENCIAL), `required` (OBRIGATÓRIO), `optional` (OPCIONAL)
   - Seção "Por que é importante" para contexto
   - Seção "O que focar" para direcionamento de estudo
   - Lista de recursos com tipos: `docs`, `video`, `article`, `course`
+  - Evento `toggle` com `{ open: boolean }` ao expandir/colapsar
   - Evento `resource-click` com `{ label, url, type }` ao clicar em recurso
+  - Animação suave com CSS grid-template-rows
+  - Acessibilidade com `aria-expanded`
 
 #### @malvezzidatr/zev-react
 
-- `ZevSkillCard` wrapper com evento `onResourceClick`
+- `ZevSkillCard` wrapper com eventos `onToggle` e `onResourceClick`
 - Export dos tipos: `SkillBadgeVariant`, `ResourceType`, `SkillResource`
 
 #### Storybook
 
-- Story `SkillCard` com 6 variantes (Default, Tipos de Badge, Com Recursos, Conteúdo Mínimo, Badge Customizado, Lista de Skills)
+- Story `SkillCard` com 7 variantes (Default, Aberto por Padrão, Tipos de Badge, Com Recursos, Conteúdo Mínimo, Badge Customizado, Lista de Skills)
 
 ### Tests
 
-- 15 novos testes unitários para `zev-skill-card`
-- Total: 365 testes passando
+- 19 testes unitários para `zev-skill-card`
+- Total: 369 testes passando
 
 ---
 

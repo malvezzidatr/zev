@@ -9,23 +9,44 @@ export const styles = css`
     background: var(--zev-color-bg-primary);
     border: 1px solid var(--zev-color-border-tag);
     border-radius: 8px;
-    padding: 1.5rem;
     font-family: var(--zev-font-primary);
+    overflow: hidden;
   }
 
   .skill-card__header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--zev-color-border-tag);
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s ease;
+  }
+
+  .skill-card__header:hover {
+    background: var(--zev-color-bg-secondary);
+  }
+
+  .skill-card__header:focus {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: -2px;
+  }
+
+  .skill-card__header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 0;
   }
 
   .skill-card__title {
     margin: 0;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: var(--zev-fw-bold);
     color: var(--zev-color-text-primary);
   }
@@ -71,6 +92,42 @@ export const styles = css`
     color: #9ca3af;
   }
 
+  .skill-card__chevron {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--zev-color-text-secondary);
+    transition: transform 0.2s ease;
+  }
+
+  .skill-card--open .skill-card__chevron {
+    transform: rotate(180deg);
+  }
+
+  .skill-card__content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+    border-top: 1px solid var(--zev-color-border-tag);
+  }
+
+  .skill-card--open .skill-card__content {
+    grid-template-rows: 1fr;
+  }
+
+  .skill-card__content-inner {
+    overflow: hidden;
+    padding: 0 1.5rem;
+  }
+
+  .skill-card__content-inner > .skill-card__section:first-child {
+    padding-top: 1rem;
+  }
+
+  .skill-card__content-inner > .skill-card__section:last-child {
+    padding-bottom: 1.5rem;
+  }
+
   .skill-card__section {
     margin-bottom: 1rem;
   }
@@ -96,7 +153,6 @@ export const styles = css`
   .skill-card__resources {
     border-top: 1px solid var(--zev-color-border-tag);
     padding-top: 1rem;
-    margin-top: 1rem;
   }
 
   .skill-card__resource-list {

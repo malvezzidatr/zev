@@ -27,6 +27,7 @@ describe('zev-skill-card', () => {
     expect(element.importance).toBe('');
     expect(element.focusPoints).toBe('');
     expect(element.resources).toEqual([]);
+    expect(element.open).toBe(false);
   });
 
   it('should render title', async () => {
@@ -73,8 +74,69 @@ describe('zev-skill-card', () => {
     expect(badge?.textContent?.trim()).toBe('CUSTOM LABEL');
   });
 
-  it('should render importance section when provided', async () => {
+  it('should start closed by default', async () => {
+    element.importance = 'This is important';
+    await elementUpdated(element);
+
+    const card = shadowQuery<HTMLDivElement>(element, '.skill-card');
+    expect(card?.classList.contains('skill-card--open')).toBe(false);
+  });
+
+  it('should toggle open when header is clicked', async () => {
+    element.importance = 'This is important';
+    await elementUpdated(element);
+
+    const header = shadowQuery<HTMLButtonElement>(element, '.skill-card__header');
+    header?.click();
+    await elementUpdated(element);
+
+    expect(element.open).toBe(true);
+    const card = shadowQuery<HTMLDivElement>(element, '.skill-card');
+    expect(card?.classList.contains('skill-card--open')).toBe(true);
+  });
+
+  it('should emit toggle event when clicked', async () => {
+    element.importance = 'This is important';
+    await elementUpdated(element);
+
+    const handler = vi.fn();
+    element.addEventListener('toggle', handler);
+
+    const header = shadowQuery<HTMLButtonElement>(element, '.skill-card__header');
+    header?.click();
+    await elementUpdated(element);
+
+    expect(handler).toHaveBeenCalled();
+    expect(handler.mock.calls[0][0].detail).toEqual({ open: true });
+
+    // Click again to close
+    header?.click();
+    await elementUpdated(element);
+
+    expect(handler.mock.calls[1][0].detail).toEqual({ open: false });
+  });
+
+  it('should render chevron when has content', async () => {
+    element.importance = 'This is important';
+    await elementUpdated(element);
+
+    const chevron = shadowQuery<SVGElement>(element, '.skill-card__chevron');
+    expect(chevron).toBeDefined();
+  });
+
+  it('should not render chevron when no content', async () => {
+    element.importance = '';
+    element.focusPoints = '';
+    element.resources = [];
+    await elementUpdated(element);
+
+    const chevron = shadowQuery<SVGElement>(element, '.skill-card__chevron');
+    expect(chevron).toBeNull();
+  });
+
+  it('should render importance section when open', async () => {
     element.importance = 'This is important because...';
+    element.open = true;
     await elementUpdated(element);
 
     const sectionTitle = shadowQuery<HTMLHeadingElement>(element, '.skill-card__section-title');
@@ -84,16 +146,9 @@ describe('zev-skill-card', () => {
     expect(sectionText?.textContent).toBe('This is important because...');
   });
 
-  it('should not render importance section when empty', async () => {
-    element.importance = '';
-    await elementUpdated(element);
-
-    const sections = shadowQueryAll<HTMLDivElement>(element, '.skill-card__section');
-    expect(sections.length).toBe(0);
-  });
-
-  it('should render focus section when provided', async () => {
+  it('should render focus section when open', async () => {
     element.focusPoints = 'Focus on unit tests and integration tests';
+    element.open = true;
     await elementUpdated(element);
 
     const sectionTitles = shadowQueryAll<HTMLHeadingElement>(element, '.skill-card__section-title');
@@ -101,12 +156,13 @@ describe('zev-skill-card', () => {
     expect(focusTitle).toBeDefined();
   });
 
-  it('should render resources when provided', async () => {
+  it('should render resources when open', async () => {
     const resources: SkillResource[] = [
       { label: 'Documentation', url: 'https://docs.example.com', type: 'docs' },
       { label: 'Video Tutorial', url: 'https://video.example.com', type: 'video' },
     ];
     element.resources = resources;
+    element.open = true;
     await elementUpdated(element);
 
     const resourceItems = shadowQueryAll<HTMLLIElement>(element, '.skill-card__resource-item');
@@ -125,6 +181,7 @@ describe('zev-skill-card', () => {
       { label: 'Crs', url: 'https://example.com', type: 'course' },
     ];
     element.resources = resources;
+    element.open = true;
     await elementUpdated(element);
 
     const typeLabels = shadowQueryAll<HTMLSpanElement>(element, '.skill-card__resource-type');
@@ -139,6 +196,7 @@ describe('zev-skill-card', () => {
       { label: 'Documentation', url: 'https://docs.example.com', type: 'docs' },
     ];
     element.resources = resources;
+    element.open = true;
     await elementUpdated(element);
 
     // Mock window.open
@@ -162,20 +220,25 @@ describe('zev-skill-card', () => {
     window.open = originalOpen;
   });
 
-  it('should not render resources section when empty', async () => {
-    element.resources = [];
+  it('should have aria-expanded attribute on header', async () => {
+    element.importance = 'This is important';
     await elementUpdated(element);
 
-    const resourcesSection = shadowQuery<HTMLDivElement>(element, '.skill-card__resources');
-    expect(resourcesSection).toBeNull();
+    const header = shadowQuery<HTMLButtonElement>(element, '.skill-card__header');
+    expect(header?.getAttribute('aria-expanded')).toBe('false');
+
+    element.open = true;
+    await elementUpdated(element);
+    expect(header?.getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('should render all sections together', async () => {
+  it('should render all sections together when open', async () => {
     element.title = 'Jest';
     element.badge = 'differential';
     element.importance = 'Important for testing';
     element.focusPoints = 'Unit tests';
     element.resources = [{ label: 'Docs', url: 'https://example.com', type: 'docs' }];
+    element.open = true;
     await elementUpdated(element);
 
     const title = shadowQuery<HTMLHeadingElement>(element, '.skill-card__title');

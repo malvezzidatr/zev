@@ -9,6 +9,7 @@ export const ZevSkillCard = createComponent({
   elementClass: ZevSkillCardElement,
   react: React,
   events: {
+    onToggle: 'toggle' as EventName<CustomEvent<{ open: boolean }>>,
     onResourceClick: 'resource-click' as EventName<CustomEvent<SkillResource>>,
   },
 });

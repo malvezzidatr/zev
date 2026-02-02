@@ -13,8 +13,9 @@ export interface SkillResource {
 }
 
 /**
- * Skill card component for educational content
+ * Skill card accordion component for educational content
  * @element zev-skill-card
+ * @fires toggle - Fired when accordion is expanded/collapsed
  * @fires resource-click - Fired when a resource link is clicked
  */
 @customElement('zev-skill-card')
@@ -39,6 +40,9 @@ export class ZevSkillCard extends ZevBase {
   /** Resources for learning */
   @property({ type: Array }) resources: SkillResource[] = [];
 
+  /** Whether the accordion is open */
+  @property({ type: Boolean, reflect: true }) open = false;
+
   private _getBadgeLabel(): string {
     if (this.badgeLabel) return this.badgeLabel;
 
@@ -59,8 +63,14 @@ export class ZevSkillCard extends ZevBase {
     }
   }
 
+  private _handleToggle() {
+    this.open = !this.open;
+    this.emitEvent('toggle', { open: this.open });
+  }
+
   private _handleResourceClick(resource: SkillResource, e: Event) {
     e.preventDefault();
+    e.stopPropagation();
     this.emitEvent('resource-click', {
       label: resource.label,
       url: resource.url,
@@ -72,48 +82,68 @@ export class ZevSkillCard extends ZevBase {
   }
 
   render() {
+    const hasContent = this.importance || this.focusPoints || this.resources.length > 0;
+
     return html`
-      <div class="skill-card">
-        <div class="skill-card__header">
-          <h3 class="skill-card__title">${this.title}</h3>
-          <span class="skill-card__badge skill-card__badge--${this.badge}">
-            ${this._getBadgeLabel()}
-          </span>
-        </div>
-
-        ${this.importance ? html`
-          <div class="skill-card__section">
-            <h4 class="skill-card__section-title">Por que é importante:</h4>
-            <p class="skill-card__section-text">${this.importance}</p>
+      <div class="skill-card ${this.open ? 'skill-card--open' : ''}">
+        <button
+          class="skill-card__header"
+          @click=${this._handleToggle}
+          aria-expanded=${this.open}
+          aria-controls="content"
+        >
+          <div class="skill-card__header-content">
+            <h3 class="skill-card__title">${this.title}</h3>
+            <span class="skill-card__badge skill-card__badge--${this.badge}">
+              ${this._getBadgeLabel()}
+            </span>
           </div>
-        ` : nothing}
+          ${hasContent ? html`
+            <svg class="skill-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          ` : nothing}
+        </button>
 
-        ${this.focusPoints ? html`
-          <div class="skill-card__section">
-            <h4 class="skill-card__section-title">O que focar:</h4>
-            <p class="skill-card__section-text">${this.focusPoints}</p>
-          </div>
-        ` : nothing}
+        ${hasContent ? html`
+          <div class="skill-card__content" id="content">
+            <div class="skill-card__content-inner">
+              ${this.importance ? html`
+                <div class="skill-card__section">
+                  <h4 class="skill-card__section-title">Por que é importante:</h4>
+                  <p class="skill-card__section-text">${this.importance}</p>
+                </div>
+              ` : nothing}
 
-        ${this.resources.length > 0 ? html`
-          <div class="skill-card__section skill-card__resources">
-            <h4 class="skill-card__section-title">Recursos para estudar:</h4>
-            <ul class="skill-card__resource-list">
-              ${this.resources.map(resource => html`
-                <li class="skill-card__resource-item">
-                  <a
-                    href=${resource.url}
-                    class="skill-card__resource-link"
-                    @click=${(e: Event) => this._handleResourceClick(resource, e)}
-                  >
-                    ${resource.label}
-                  </a>
-                  <span class="skill-card__resource-type skill-card__resource-type--${resource.type}">
-                    ${this._getResourceTypeLabel(resource.type)}
-                  </span>
-                </li>
-              `)}
-            </ul>
+              ${this.focusPoints ? html`
+                <div class="skill-card__section">
+                  <h4 class="skill-card__section-title">O que focar:</h4>
+                  <p class="skill-card__section-text">${this.focusPoints}</p>
+                </div>
+              ` : nothing}
+
+              ${this.resources.length > 0 ? html`
+                <div class="skill-card__section skill-card__resources">
+                  <h4 class="skill-card__section-title">Recursos para estudar:</h4>
+                  <ul class="skill-card__resource-list">
+                    ${this.resources.map(resource => html`
+                      <li class="skill-card__resource-item">
+                        <a
+                          href=${resource.url}
+                          class="skill-card__resource-link"
+                          @click=${(e: Event) => this._handleResourceClick(resource, e)}
+                        >
+                          ${resource.label}
+                        </a>
+                        <span class="skill-card__resource-type skill-card__resource-type--${resource.type}">
+                          ${this._getResourceTypeLabel(resource.type)}
+                        </span>
+                      </li>
+                    `)}
+                  </ul>
+                </div>
+              ` : nothing}
+            </div>
           </div>
         ` : nothing}
       </div>
