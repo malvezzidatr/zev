@@ -73,7 +73,7 @@ export const styles = css`
   .btn--outline-light {
     background: transparent;
     border: 1px solid #fff;
-    color: var(--zev-color-bg-primary);
+    color: #fff;
   }
 
   .btn--outline-light:hover:not(:disabled) {
