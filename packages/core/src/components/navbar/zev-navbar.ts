@@ -30,8 +30,7 @@ export class ZevNavbar extends ZevBase {
     this.emitEvent('lang-toggle', { lang: this.lang === 'pt' ? 'en' : 'pt' });
   }
 
-  private _handleNavClick(link: NavLink, e: Event) {
-    e.preventDefault();
+  private _handleNavClick(link: NavLink) {
     this._menuOpen = false;
     this.emitEvent('nav-click', { link });
   }
@@ -57,7 +56,7 @@ export class ZevNavbar extends ZevBase {
                 <a
                   class="navbar__link"
                   href=${link.href}
-                  @click=${(e: Event) => this._handleNavClick(link, e)}
+                  @click=${() => this._handleNavClick(link)}
                 >${link.label}</a>
               `)}
             </div>
