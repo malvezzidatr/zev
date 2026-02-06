@@ -28,6 +28,19 @@ describe('zev-navbar', () => {
     expect(logo?.textContent).toBe('ZEV');
   });
 
+  it('should have default logoHref as /', () => {
+    const logo = shadowQuery<HTMLAnchorElement>(element, '.navbar__logo');
+    expect(logo?.getAttribute('href')).toBe('/');
+  });
+
+  it('should use custom logoHref', async () => {
+    element.logoHref = '/home';
+    await elementUpdated(element);
+
+    const logo = shadowQuery<HTMLAnchorElement>(element, '.navbar__logo');
+    expect(logo?.getAttribute('href')).toBe('/home');
+  });
+
   it('should render navigation links', async () => {
     element.links = [
       { label: 'Home', href: '#home' },

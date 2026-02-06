@@ -17,6 +17,9 @@ import '@malvezzidatr/zev-core';
  * ### Eventos
  * - `lang-toggle`: Disparado ao clicar no toggle de idioma
  * - `nav-click`: Disparado ao clicar em um link de navegação
+ *
+ * ### Props
+ * - `logo-href`: URL para onde o logo redireciona ao ser clicado (default: `/`)
  */
 export default {
   title: 'Components/Navbar',
@@ -27,6 +30,11 @@ export default {
       control: 'text',
       description: 'Texto exibido como logo',
       table: { defaultValue: { summary: 'CM' } },
+    },
+    logoHref: {
+      control: 'text',
+      description: 'URL de redirecionamento ao clicar no logo',
+      table: { defaultValue: { summary: '/' } },
     },
     lang: {
       control: 'select',
@@ -54,6 +62,7 @@ export default {
 export const Default = {
   args: {
     logo: 'CM',
+    logoHref: '/',
     lang: 'pt',
     langLabel: 'EN',
     showLangToggle: true,
@@ -66,6 +75,7 @@ export const Default = {
   render: (args: any) => html`
     <zev-navbar
       .logo=${args.logo}
+      .logoHref=${args.logoHref}
       .lang=${args.lang}
       .langLabel=${args.langLabel}
       .showLangToggle=${args.showLangToggle}

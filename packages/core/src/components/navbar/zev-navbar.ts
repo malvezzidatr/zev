@@ -14,6 +14,7 @@ export class ZevNavbar extends ZevBase {
   static styles = [...ZevBase.styles, styles];
 
   @property() logo = 'CM';
+  @property({ attribute: 'logo-href' }) logoHref = '/';
   @property({ type: Array }) links: NavLink[] = [];
   @property() lang = 'pt';
   @property({ attribute: 'lang-label' }) langLabel = 'EN';
@@ -39,7 +40,7 @@ export class ZevNavbar extends ZevBase {
     return html`
       <nav class="navbar">
         <div class="navbar__container">
-          <a class="navbar__logo" href="#">${this.logo}</a>
+          <a class="navbar__logo" href=${this.logoHref}>${this.logo}</a>
 
           <div class="navbar__actions">
             ${this.showLangToggle ? html`

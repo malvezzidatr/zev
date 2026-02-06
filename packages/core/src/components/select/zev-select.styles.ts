@@ -22,12 +22,21 @@ export const styles = css`
     font-family: var(--zev-font-primary);
     font-size: var(--zev-fs-body);
     color: var(--zev-color-text-primary);
-    background: transparent;
+    background: var(--zev-color-bg-primary);
     border: 1px solid var(--zev-color-border-tag);
     border-radius: 4px;
     cursor: pointer;
     appearance: none;
     transition: border-color 0.15s ease;
+  }
+
+  .select option {
+    background: var(--zev-color-bg-primary);
+    color: var(--zev-color-text-primary);
+  }
+
+  :host-context([data-theme="dark"]) .select {
+    color-scheme: dark;
   }
 
   .select:focus {
