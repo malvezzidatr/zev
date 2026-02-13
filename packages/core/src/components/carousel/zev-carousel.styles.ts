@@ -194,4 +194,64 @@ export const styles = css`
   :host([autoplay]:hover) .carousel__track {
     animation-play-state: paused;
   }
+
+  .carousel:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .carousel__nav:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .carousel__indicator:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .carousel__pause {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: var(--zev-color-bg-primary);
+    color: var(--zev-color-text-primary);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s;
+  }
+
+  .carousel__pause:hover {
+    background: var(--zev-color-bg-secondary);
+  }
+
+  .carousel__pause:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .carousel__pause svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .carousel__live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 `;

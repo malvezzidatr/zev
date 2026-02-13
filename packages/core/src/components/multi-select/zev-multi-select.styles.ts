@@ -246,4 +246,15 @@ export const styles = css`
   :host([disabled]) .multi-select__label {
     background: var(--zev-color-bg-secondary);
   }
+
+  .multi-select__trigger:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .multi-select__option--focused,
+  .multi-select__option:focus-visible {
+    background: var(--zev-color-bg-secondary);
+    outline: none;
+  }
 `;

@@ -38,6 +38,13 @@ export class ZevBlogCard extends ZevBase {
     });
   }
 
+  private _handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._handleClick();
+    }
+  }
+
   private _renderImage() {
     if (this.image) {
       return html`
@@ -49,7 +56,7 @@ export class ZevBlogCard extends ZevBase {
     return html`
       <div class="card__image-container">
         <div class="card__image-placeholder">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z"/>
           </svg>
         </div>
@@ -90,7 +97,13 @@ export class ZevBlogCard extends ZevBase {
 
   render() {
     return html`
-      <article class="card" @click=${this._handleClick}>
+      <article
+        class="card"
+        tabindex="0"
+        role="article"
+        aria-label=${this.title}
+        @click=${this._handleClick}
+        @keydown=${this._handleKeydown}>
         ${this._renderImage()}
         <div class="card__content">
           ${this._renderMeta()}

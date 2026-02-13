@@ -109,4 +109,9 @@ export const styles = css`
     letter-spacing: 0.05em;
     font-weight: var(--zev-fw-bold);
   }
+
+  .job-card:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
 `;

@@ -153,4 +153,66 @@ describe('zev-job-card', () => {
     const article = shadowQuery<HTMLElement>(element, 'article.job-card');
     expect(article).toBeDefined();
   });
+
+  describe('accessibility', () => {
+    it('should have tabindex on article', async () => {
+      element.title = 'Test';
+      await elementUpdated(element);
+      const article = shadowQuery<HTMLElement>(element, 'article');
+      expect(article?.getAttribute('tabindex')).toBe('0');
+    });
+
+    it('should have role article', async () => {
+      element.title = 'Test';
+      await elementUpdated(element);
+      const article = shadowQuery<HTMLElement>(element, 'article');
+      expect(article?.getAttribute('role')).toBe('article');
+    });
+
+    it('should have aria-label with title', async () => {
+      element.title = 'Frontend Dev';
+      await elementUpdated(element);
+      const article = shadowQuery<HTMLElement>(element, 'article');
+      expect(article?.getAttribute('aria-label')).toBe('Frontend Dev');
+    });
+
+    it('should emit card-click on Enter key', async () => {
+      element.title = 'Test';
+      element.company = 'Company';
+      await elementUpdated(element);
+
+      const handler = vi.fn();
+      element.addEventListener('card-click', handler);
+
+      const article = shadowQuery<HTMLElement>(element, 'article');
+      article?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+      expect(handler).toHaveBeenCalled();
+    });
+
+    it('should emit card-click on Space key', async () => {
+      element.title = 'Test';
+      element.company = 'Company';
+      await elementUpdated(element);
+
+      const handler = vi.fn();
+      element.addEventListener('card-click', handler);
+
+      const article = shadowQuery<HTMLElement>(element, 'article');
+      article?.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+
+      expect(handler).toHaveBeenCalled();
+    });
+
+    it('should have aria-hidden on decorative SVGs', async () => {
+      element.location = 'São Paulo';
+      element.salary = 'R$ 10k';
+      await elementUpdated(element);
+
+      const svgs = shadowQueryAll<SVGElement>(element, 'svg');
+      svgs.forEach(svg => {
+        expect(svg.getAttribute('aria-hidden')).toBe('true');
+      });
+    });
+  });
 });

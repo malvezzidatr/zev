@@ -32,6 +32,13 @@ export class ZevTag extends ZevBase {
     }
   }
 
+  private _handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._handleClick();
+    }
+  }
+
   private _handleRemove(e: Event) {
     e.stopPropagation();
     this.emitEvent('tag-remove', { label: this.label });
@@ -68,6 +75,7 @@ export class ZevTag extends ZevBase {
       <span
         class=${classMap(classes)}
         @click=${this._handleClick}
+        @keydown=${this.interactive ? this._handleKeydown : nothing}
         role=${this.interactive ? 'button' : nothing}
         tabindex=${this.interactive ? '0' : nothing}
       >

@@ -38,7 +38,7 @@ export class ZevBadge extends ZevBase {
     };
 
     return html`
-      <span class=${classMap(classes)}>
+      <span class=${classMap(classes)} role="status">
         <slot>${this.label}</slot>
       </span>
     `;

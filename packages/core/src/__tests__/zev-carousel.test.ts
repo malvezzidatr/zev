@@ -178,6 +178,43 @@ describe('zev-carousel', () => {
     const indicators = shadowQueryAll<HTMLButtonElement>(element, '.carousel__indicator');
     expect(indicators[2]?.classList.contains('carousel__indicator--active')).toBe(true);
   });
+
+  describe('accessibility', () => {
+    it('should have role region on carousel', async () => {
+      const carousel = shadowQuery<HTMLElement>(element, '.carousel');
+      expect(carousel?.getAttribute('role')).toBe('region');
+    });
+
+    it('should have aria-roledescription', async () => {
+      const carousel = shadowQuery<HTMLElement>(element, '.carousel');
+      expect(carousel?.getAttribute('aria-roledescription')).toBe('carrossel');
+    });
+
+    it('should have aria-label on carousel', async () => {
+      const carousel = shadowQuery<HTMLElement>(element, '.carousel');
+      expect(carousel?.getAttribute('aria-label')).toBeTruthy();
+    });
+
+    it('should have aria-hidden on nav SVGs', async () => {
+      const svgs = shadowQueryAll<SVGElement>(element, '.carousel__nav svg');
+      svgs.forEach(svg => {
+        expect(svg.getAttribute('aria-hidden')).toBe('true');
+      });
+    });
+
+    it('should have live region for slide announcements', async () => {
+      const live = shadowQuery<HTMLElement>(element, '.carousel__live');
+      expect(live?.getAttribute('aria-live')).toBe('polite');
+    });
+
+    it('should show pause button when autoplay is enabled', async () => {
+      element.autoplay = true;
+      await elementUpdated(element);
+
+      const pause = shadowQuery<HTMLElement>(element, '.carousel__pause');
+      expect(pause).not.toBeNull();
+    });
+  });
 });
 
 describe('zev-carousel-item', () => {

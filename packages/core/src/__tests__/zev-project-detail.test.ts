@@ -255,6 +255,35 @@ describe('zev-project-detail', () => {
     await elementUpdated(element);
 
     const closeButton = shadowQuery<HTMLButtonElement>(element, '.modal__close');
-    expect(closeButton?.getAttribute('aria-label')).toBe('Close');
+    expect(closeButton?.getAttribute('aria-label')).toBe('Fechar');
+  });
+
+  describe('accessibility', () => {
+    it('should have aria-labelledby pointing to title', async () => {
+      element.open = true;
+      element.project = mockProject;
+      await elementUpdated(element);
+
+      const content = shadowQuery<HTMLElement>(element, '.modal__content');
+      expect(content?.getAttribute('aria-labelledby')).toBe('project-detail-title');
+    });
+
+    it('should have id on title for aria-labelledby', async () => {
+      element.open = true;
+      element.project = mockProject;
+      await elementUpdated(element);
+
+      const title = shadowQuery<HTMLElement>(element, '.modal__title');
+      expect(title?.getAttribute('id')).toBe('project-detail-title');
+    });
+
+    it('should have aria-hidden on close button SVG', async () => {
+      element.open = true;
+      element.project = mockProject;
+      await elementUpdated(element);
+
+      const svg = shadowQuery<SVGElement>(element, '.modal__close svg');
+      expect(svg?.getAttribute('aria-hidden')).toBe('true');
+    });
   });
 });

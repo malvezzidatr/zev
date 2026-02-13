@@ -5,6 +5,90 @@ Todas as mudanças notáveis do projeto serão documentadas neste arquivo.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [0.8.1] - 2026-02-13
+
+### Accessibility (WCAG 2.1 AA)
+
+#### @malvezzidatr/zev-core
+
+- **Focus trap** — Novo utilitário `focus-trap.ts` para reter foco dentro de modais
+  - Usado por `zev-modal` e `zev-project-detail`
+  - Salva e restaura foco ao elemento anterior ao fechar
+
+- **zev-modal** — Focus trap ao abrir, `aria-hidden` no SVG do close, `:focus-visible` no botão close
+
+- **zev-project-detail** — Focus trap, `aria-labelledby` apontando para o título, `aria-hidden` no SVG do close, `:focus-visible`
+
+- **zev-job-card**, **zev-project-card**, **zev-blog-card** — Cards agora acessíveis via teclado
+  - `tabindex="0"`, `role="article"`, `aria-label` com título
+  - Enter/Space dispara `card-click`
+  - `:focus-visible` com outline de destaque
+  - `aria-hidden="true"` em SVGs decorativos
+
+- **zev-loader** — `role="status"` e `aria-label="Carregando"`
+
+- **zev-input** — `aria-labelledby` associando input ao label, `:focus-visible` no botão clear, `aria-hidden` nos ícones
+
+- **zev-select** — `aria-labelledby` associando select ao label, `aria-hidden` no chevron SVG
+
+- **zev-multi-select** — Acessibilidade completa
+  - Trigger com `role="combobox"`, `aria-expanded`, `aria-haspopup="listbox"`, `tabindex="0"`, `aria-labelledby`
+  - Dropdown com `role="listbox"`, `aria-multiselectable`
+  - Opções com `role="option"`, `aria-selected`
+  - Teclado: Enter/Space abre/fecha, Escape fecha, ArrowUp/ArrowDown navega opções
+  - `:focus-visible` no trigger e opções
+
+- **zev-file-upload** — Dropzone acessível via teclado
+  - `role="button"`, `tabindex="0"`, `aria-label`
+  - Enter/Space aciona file picker
+  - Erro com `aria-live="assertive"`
+  - `:focus-visible` no dropzone e botão de remover
+  - `aria-hidden` em todos os SVGs decorativos
+
+- **zev-carousel** — Acessibilidade completa
+  - `role="region"`, `aria-roledescription="carrossel"`, `aria-label`
+  - Teclado: ArrowLeft/ArrowRight navega slides
+  - Botão pause/play para autoplay
+  - `aria-live="polite"` anuncia slide atual
+  - `aria-hidden` nos SVGs de navegação
+  - `:focus-visible` em todos os controles
+
+- **zev-navbar** — Keyboard e focus management
+  - `aria-label="Navegação principal"` no nav
+  - Escape fecha menu mobile e retorna foco ao hamburger
+  - Foco move para primeiro link ao abrir menu
+  - `aria-label` melhorado no lang toggle
+  - `:focus-visible` em links, lang toggle e hamburger
+
+- **zev-tag** — Enter/Space dispara click em modo interativo
+
+- **zev-badge** — `role="status"` para anunciar mudanças
+
+- **zev-empty-state** — `role="status"`, `aria-hidden` no ícone padrão
+
+- **zev-stat-card** — `aria-label` composto com valor e label
+
+- **zev-timeline** — `role="list"` e `aria-label="Linha do tempo"`
+
+- **zev-timeline-item** — `role="listitem"`, `aria-hidden` no dot decorativo
+
+- **zev-section-header** — Nova prop `headingLevel` para nível flexível do heading (aria-level)
+
+- **zev-sticky-sidebar** — `aria-label` no aside, `aria-hidden` no accent e SVG placeholder
+
+- **zev-pagination** — `aria-label="Mais páginas"` no ellipsis, `aria-hidden` nos SVGs de navegação
+
+- **zev-skill-card** — `aria-hidden` no chevron SVG
+
+- **Todos os SVGs decorativos** — `aria-hidden="true"` aplicado em 13+ componentes
+
+### Tests
+
+- 48 novos testes de acessibilidade em 12 arquivos de teste
+- Total: 439 testes passando
+
+---
+
 ## [0.8.0] - 2025-02-13
 
 ### Added

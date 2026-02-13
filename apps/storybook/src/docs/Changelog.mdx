@@ -11,6 +11,34 @@ e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.8.1] - 2026-02-13
+
+### Accessibility (WCAG 2.1 AA)
+
+#### @malvezzidatr/zev-core
+
+- **Focus trap** — Novo utilitário para reter foco dentro de modais (`zev-modal`, `zev-project-detail`)
+- **Cards clicáveis** — `zev-job-card`, `zev-project-card`, `zev-blog-card` agora acessíveis via teclado (Enter/Space, tabindex, role, aria-label, focus-visible)
+- **Multi-select** — ARIA completo: `role="combobox"`, `role="listbox"`, `role="option"`, navegação por teclado (Arrow keys, Enter, Escape)
+- **File upload** — Dropzone acessível via teclado com `role="button"`, Enter/Space, `aria-live` para erros
+- **Carousel** — `role="region"`, `aria-roledescription`, Arrow keys para navegar, botão pause/play, `aria-live` para anúncios
+- **Navbar** — Escape fecha menu, foco gerenciado ao abrir/fechar, `aria-label` no nav
+- **Input/Select** — `aria-labelledby` para associação de labels
+- **Loader** — `role="status"` e `aria-label`
+- **Tag** — Enter/Space em modo interativo
+- **Badge** — `role="status"`
+- **Timeline** — `role="list"`/`role="listitem"`, `aria-label`
+- **Section Header** — Nova prop `headingLevel` para aria-level flexível
+- **Todos os SVGs decorativos** — `aria-hidden="true"` em 13+ componentes
+- **Focus-visible** — Outline de destaque em todos os controles interativos (15+ componentes)
+
+### Tests
+
+- 48 novos testes de acessibilidade
+- Total: 439 testes passando
+
+---
+
 ## [0.8.0] - 2025-02-13
 
 ### Added

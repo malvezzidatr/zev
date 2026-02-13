@@ -66,7 +66,7 @@ export class ZevPagination extends ZevBase {
 
     return pages.map(page => {
       if (page === '...') {
-        return html`<span class="pagination__ellipsis">...</span>`;
+        return html`<span class="pagination__ellipsis" aria-label="Mais páginas">...</span>`;
       }
 
       const isActive = page === this.currentPage;
@@ -95,7 +95,7 @@ export class ZevPagination extends ZevBase {
           ?disabled=${this.currentPage <= 1}
           aria-label="Página anterior"
         >
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
           </svg>
         </button>
@@ -108,7 +108,7 @@ export class ZevPagination extends ZevBase {
           ?disabled=${this.currentPage >= this.totalPages}
           aria-label="Próxima página"
         >
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
           </svg>
         </button>

@@ -24,6 +24,22 @@ export class ZevNavbar extends ZevBase {
 
   private _toggleMenu() {
     this._menuOpen = !this._menuOpen;
+    if (this._menuOpen) {
+      // Focus first link when menu opens
+      requestAnimationFrame(() => {
+        const firstLink = this.shadowRoot?.querySelector<HTMLElement>('.navbar__link');
+        firstLink?.focus();
+      });
+    }
+  }
+
+  private _handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape' && this._menuOpen) {
+      this._menuOpen = false;
+      // Return focus to hamburger
+      const hamburger = this.shadowRoot?.querySelector<HTMLElement>('.navbar__hamburger');
+      hamburger?.focus();
+    }
   }
 
   private _handleLangToggle() {
@@ -37,13 +53,13 @@ export class ZevNavbar extends ZevBase {
 
   render() {
     return html`
-      <nav class="navbar">
+      <nav class="navbar" aria-label="Navegação principal" @keydown=${this._handleKeydown}>
         <div class="navbar__container">
           <a class="navbar__logo" href=${this.logoHref}>${this.logo}</a>
 
           <div class="navbar__actions">
             ${this.showLangToggle ? html`
-              <button class="navbar__lang-toggle" @click=${this._handleLangToggle}>
+              <button class="navbar__lang-toggle" @click=${this._handleLangToggle} aria-label="Idioma: ${this.langLabel}">
                 ${this.langLabel}
               </button>
             ` : nothing}

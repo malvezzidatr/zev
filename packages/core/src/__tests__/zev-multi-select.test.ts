@@ -294,4 +294,73 @@ describe('zev-multi-select', () => {
     dropdown = shadowQuery<HTMLDivElement>(element, '.multi-select__dropdown');
     expect(dropdown).toBeNull();
   });
+
+  describe('accessibility', () => {
+    it('should have role combobox on trigger', async () => {
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      expect(trigger?.getAttribute('role')).toBe('combobox');
+    });
+
+    it('should have aria-expanded false when closed', async () => {
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      expect(trigger?.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('should have aria-haspopup listbox', async () => {
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      expect(trigger?.getAttribute('aria-haspopup')).toBe('listbox');
+    });
+
+    it('should have tabindex 0 on trigger', async () => {
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      expect(trigger?.getAttribute('tabindex')).toBe('0');
+    });
+
+    it('should open on Enter key', async () => {
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      trigger?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      await elementUpdated(element);
+
+      const dropdown = shadowQuery<HTMLElement>(element, '.multi-select__dropdown');
+      expect(dropdown).not.toBeNull();
+    });
+
+    it('should close on Escape key', async () => {
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      trigger?.click();
+      await elementUpdated(element);
+
+      trigger?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      await elementUpdated(element);
+
+      const dropdown = shadowQuery<HTMLElement>(element, '.multi-select__dropdown');
+      expect(dropdown).toBeNull();
+    });
+
+    it('should have role listbox on options container', async () => {
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      trigger?.click();
+      await elementUpdated(element);
+
+      const options = shadowQuery<HTMLElement>(element, '.multi-select__options');
+      expect(options?.getAttribute('role')).toBe('listbox');
+    });
+
+    it('should have role option on each option', async () => {
+      element.options = [{ value: '1', label: 'One' }, { value: '2', label: 'Two' }];
+      await elementUpdated(element);
+
+      const trigger = shadowQuery<HTMLElement>(element, '.multi-select__trigger');
+      trigger?.click();
+      await elementUpdated(element);
+
+      const opts = shadowQueryAll<HTMLElement>(element, '[role="option"]');
+      expect(opts.length).toBe(2);
+    });
+
+    it('should have aria-hidden on chevron SVG', async () => {
+      const svg = shadowQuery<SVGElement>(element, '.multi-select__chevron');
+      expect(svg?.getAttribute('aria-hidden')).toBe('true');
+    });
+  });
 });

@@ -22,11 +22,14 @@ export class ZevSectionHeader extends ZevBase {
   /** Tamanho do título */
   @property({ reflect: true }) size: SectionHeaderSize = 'medium';
 
+  /** Nível do heading (1-6) */
+  @property({ type: Number, attribute: 'heading-level' }) headingLevel = 2;
+
   render() {
     return html`
       <header class="header">
         ${this.tag ? html`<span class="header__tag">${this.tag}</span>` : nothing}
-        <h2 class="header__title">
+        <h2 class="header__title" role="heading" aria-level=${this.headingLevel}>
           <slot>${this.title}</slot>
         </h2>
       </header>

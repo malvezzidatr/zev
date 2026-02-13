@@ -29,6 +29,8 @@ export class ZevSelect extends ZevBase {
   /** Whether the select is disabled */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  private _selectId = `zev-select-${Math.random().toString(36).substring(2, 9)}`;
+
   private _handleChange(e: Event) {
     const select = e.target as HTMLSelectElement;
     this.value = select.value;
@@ -42,7 +44,7 @@ export class ZevSelect extends ZevBase {
   private _renderLabel() {
     if (!this.label) return nothing;
 
-    return html`<label class="select__label">${this.label}</label>`;
+    return html`<label class="select__label" id="${this._selectId}-label">${this.label}</label>`;
   }
 
   render() {
@@ -53,8 +55,10 @@ export class ZevSelect extends ZevBase {
         <div class="select-wrapper">
           <select
             class="select ${hasValue ? 'select--has-value' : ''}"
+            id=${this._selectId}
             .value=${this.value}
             ?disabled=${this.disabled}
+            aria-labelledby=${this.label ? `${this._selectId}-label` : nothing}
             @change=${this._handleChange}
           >
             <option value="" ?disabled=${hasValue} ?selected=${!hasValue}></option>
@@ -67,7 +71,7 @@ export class ZevSelect extends ZevBase {
             )}
           </select>
           ${this._renderLabel()}
-          <svg class="select__chevron" viewBox="0 0 24 24" fill="currentColor">
+          <svg class="select__chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M7 10l5 5 5-5z"/>
           </svg>
         </div>

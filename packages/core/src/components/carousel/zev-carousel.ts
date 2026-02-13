@@ -37,6 +37,7 @@ export class ZevCarousel extends ZevBase {
   @state() private _currentIndex = 0;
   @state() private _isDragging = false;
   @state() private _slideCount = 0;
+  @state() private _isPaused = false;
 
   @query('.carousel__track') private _track!: HTMLElement;
 
@@ -104,8 +105,30 @@ export class ZevCarousel extends ZevBase {
   }
 
   private _handleMouseLeave() {
-    if (this.autoplay && this.pauseOnHover) {
+    if (this.autoplay && this.pauseOnHover && !this._isPaused) {
       this._startAutoplay();
+    }
+  }
+
+  private _togglePause() {
+    this._isPaused = !this._isPaused;
+    if (this._isPaused) {
+      this._stopAutoplay();
+    } else {
+      this._startAutoplay();
+    }
+  }
+
+  private _handleKeydown(e: KeyboardEvent) {
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        this._prev();
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        this._next();
+        break;
     }
   }
 
@@ -202,8 +225,13 @@ export class ZevCarousel extends ZevBase {
     return html`
       <div
         class="carousel"
+        role="region"
+        aria-roledescription="carrossel"
+        aria-label="Carrossel de conteúdo"
+        tabindex="0"
         @mouseenter=${this._handleMouseEnter}
         @mouseleave=${this._handleMouseLeave}
+        @keydown=${this._handleKeydown}
       >
         <div
           class="carousel__viewport"
@@ -227,7 +255,7 @@ export class ZevCarousel extends ZevBase {
             ?disabled=${!this._canGoPrev}
             aria-label="Anterior"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
@@ -237,11 +265,33 @@ export class ZevCarousel extends ZevBase {
             ?disabled=${!this._canGoNext}
             aria-label="Próximo"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
         ` : null}
+
+        ${this.autoplay ? html`
+          <button
+            class="carousel__pause"
+            @click=${this._togglePause}
+            aria-label=${this._isPaused ? 'Reproduzir carrossel' : 'Pausar carrossel'}
+          >
+            ${this._isPaused ? html`
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            ` : html`
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+            `}
+          </button>
+        ` : null}
+
+        <div class="carousel__live" aria-live="polite" aria-atomic="true">
+          Slide ${this._currentIndex + 1} de ${this._maxIndex + 1}
+        </div>
 
         ${!this.hideIndicators && this._totalSlides > 1 ? html`
           <div class="carousel__indicators" role="tablist">

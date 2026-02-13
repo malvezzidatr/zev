@@ -77,6 +77,11 @@ export const styles = css`
     background: var(--zev-color-bg-secondary);
   }
 
+  .modal__close:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
   .modal__body {
     padding: 1.5rem;
   }

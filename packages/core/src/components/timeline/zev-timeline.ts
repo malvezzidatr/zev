@@ -45,7 +45,7 @@ export class ZevTimeline extends ZevBase {
     const hasItems = this.items.length > 0;
 
     return html`
-      <div class="timeline">
+      <div class="timeline" role="list" aria-label="Linha do tempo">
         ${hasItems
           ? this.items.map(item => html`
               <zev-timeline-item

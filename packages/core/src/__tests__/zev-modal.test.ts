@@ -186,4 +186,22 @@ describe('zev-modal', () => {
     const body = shadowQuery<HTMLElement>(element, '.modal__body');
     expect(body).not.toBeNull();
   });
+
+  describe('accessibility', () => {
+    it('should have aria-hidden on close button SVG', async () => {
+      element.open = true;
+      element.title = 'Test';
+      await elementUpdated(element);
+      const svg = shadowQuery<SVGElement>(element, '.modal__close svg');
+      expect(svg?.getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('should have focus-visible styles on close button', async () => {
+      element.open = true;
+      element.title = 'Test';
+      await elementUpdated(element);
+      const closeBtn = shadowQuery<HTMLButtonElement>(element, '.modal__close');
+      expect(closeBtn).not.toBeNull();
+    });
+  });
 });

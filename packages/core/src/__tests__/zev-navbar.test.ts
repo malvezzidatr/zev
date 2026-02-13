@@ -136,4 +136,38 @@ describe('zev-navbar', () => {
     const langToggle = shadowQuery<HTMLButtonElement>(element, '.navbar__lang-toggle');
     expect(langToggle).toBeNull();
   });
+
+  describe('accessibility', () => {
+    it('should have aria-label on nav element', async () => {
+      const nav = shadowQuery<HTMLElement>(element, '.navbar');
+      expect(nav?.getAttribute('aria-label')).toBe('Navegação principal');
+    });
+
+    it('should have aria-label on lang toggle', async () => {
+      element.showLangToggle = true;
+      element.langLabel = 'EN';
+      await elementUpdated(element);
+
+      const toggle = shadowQuery<HTMLElement>(element, '.navbar__lang-toggle');
+      expect(toggle?.getAttribute('aria-label')).toContain('EN');
+    });
+
+    it('should close menu on Escape key', async () => {
+      element.links = [{ label: 'Home', href: '/' }];
+      await elementUpdated(element);
+
+      // Open menu
+      const hamburger = shadowQuery<HTMLButtonElement>(element, '.navbar__hamburger');
+      hamburger?.click();
+      await elementUpdated(element);
+
+      // Press Escape
+      const nav = shadowQuery<HTMLElement>(element, '.navbar');
+      nav?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      await elementUpdated(element);
+
+      const links = shadowQuery<HTMLElement>(element, '.navbar__links');
+      expect(links?.classList.contains('navbar__links--open')).toBe(false);
+    });
+  });
 });

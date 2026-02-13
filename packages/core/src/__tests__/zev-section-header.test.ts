@@ -124,4 +124,18 @@ describe('zev-section-header', () => {
     expect(tag).toBeDefined();
     expect(title).toBeDefined();
   });
+
+  describe('accessibility', () => {
+    it('should have default heading level 2', () => {
+      const heading = shadowQuery<HTMLElement>(element, '.header__title');
+      expect(heading?.getAttribute('aria-level')).toBe('2');
+    });
+
+    it('should respect custom heading level', async () => {
+      element.headingLevel = 3;
+      await elementUpdated(element);
+      const heading = shadowQuery<HTMLElement>(element, '.header__title');
+      expect(heading?.getAttribute('aria-level')).toBe('3');
+    });
+  });
 });

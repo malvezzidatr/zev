@@ -73,4 +73,16 @@ describe('zev-loader', () => {
     expect(skeleton?.style.width).toBe('100px');
     expect(skeleton?.style.height).toBe('20px');
   });
+
+  describe('accessibility', () => {
+    it('should have role status', () => {
+      const skeleton = shadowQuery<HTMLElement>(element, '.skeleton');
+      expect(skeleton?.getAttribute('role')).toBe('status');
+    });
+
+    it('should have aria-label', () => {
+      const skeleton = shadowQuery<HTMLElement>(element, '.skeleton');
+      expect(skeleton?.getAttribute('aria-label')).toBe('Carregando');
+    });
+  });
 });

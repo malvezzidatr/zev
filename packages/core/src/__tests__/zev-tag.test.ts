@@ -219,4 +219,34 @@ describe('zev-tag', () => {
     expect(removeHandler).toHaveBeenCalled();
     expect(clickHandler).not.toHaveBeenCalled();
   });
+
+  describe('accessibility', () => {
+    it('should handle Enter key when interactive', async () => {
+      element.interactive = true;
+      element.label = 'Test';
+      await elementUpdated(element);
+
+      const handler = vi.fn();
+      element.addEventListener('tag-click', handler);
+
+      const span = shadowQuery<HTMLElement>(element, '.tag');
+      span?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+      expect(handler).toHaveBeenCalled();
+    });
+
+    it('should handle Space key when interactive', async () => {
+      element.interactive = true;
+      element.label = 'Test';
+      await elementUpdated(element);
+
+      const handler = vi.fn();
+      element.addEventListener('tag-click', handler);
+
+      const span = shadowQuery<HTMLElement>(element, '.tag');
+      span?.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+
+      expect(handler).toHaveBeenCalled();
+    });
+  });
 });

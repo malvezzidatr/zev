@@ -170,4 +170,9 @@ export const styles = css`
     object-fit: cover;
     background: var(--zev-color-bg-secondary);
   }
+
+  .card:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
 `;

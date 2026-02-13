@@ -144,6 +144,13 @@ export class ZevFileUpload extends ZevBase {
     }
   }
 
+  private _handleDropzoneKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._handleClick();
+    }
+  }
+
   private _handleInputChange(e: Event) {
     const input = e.target as HTMLInputElement;
     this._handleFiles(input.files);
@@ -178,7 +185,11 @@ export class ZevFileUpload extends ZevBase {
 
         <div
           class=${classMap(dropzoneClasses)}
+          role="button"
+          tabindex="0"
+          aria-label="Arraste arquivos ou clique para selecionar"
           @click=${this._handleClick}
+          @keydown=${this._handleDropzoneKeydown}
           @dragover=${this._handleDragOver}
           @dragleave=${this._handleDragLeave}
           @drop=${this._handleDrop}
@@ -192,7 +203,7 @@ export class ZevFileUpload extends ZevBase {
             @change=${this._handleInputChange}
           />
 
-          <svg class="upload__icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <svg class="upload__icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="17 8 12 3 7 8"></polyline>
             <line x1="12" y1="3" x2="12" y2="15"></line>
@@ -206,13 +217,13 @@ export class ZevFileUpload extends ZevBase {
           </div>
         </div>
 
-        ${this.error ? html`<p class="upload__error">${this.error}</p>` : nothing}
+        ${this.error ? html`<p class="upload__error" role="alert" aria-live="assertive">${this.error}</p>` : nothing}
 
         ${this._files.length > 0 ? html`
           <div class="upload__files">
             ${this._files.map(({ file, id }) => html`
               <div class="upload__file">
-                <svg class="upload__file-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg class="upload__file-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
                 </svg>
@@ -225,7 +236,7 @@ export class ZevFileUpload extends ZevBase {
                   @click=${() => this._handleRemoveFile(id)}
                   aria-label="Remover arquivo"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>

@@ -21,8 +21,8 @@ export class ZevTimelineItem extends ZevBase {
 
   render() {
     return html`
-      <div class="item">
-        <div class="item__dot"></div>
+      <div class="item" role="listitem">
+        <div class="item__dot" aria-hidden="true"></div>
         <div class="item__content">
           ${this.year ? html`<span class="item__year">${this.year}</span>` : nothing}
           <h4 class="item__title">

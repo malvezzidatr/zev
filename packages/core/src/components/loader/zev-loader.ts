@@ -36,7 +36,7 @@ export class ZevLoader extends ZevBase {
       this.height ? `height: ${this.height}` : '',
     ].filter(Boolean).join('; ');
 
-    return html`<div class=${classMap(classes)} style=${inlineStyle || nothing}></div>`;
+    return html`<div class=${classMap(classes)} style=${inlineStyle || nothing} role="status" aria-label="Carregando"></div>`;
   }
 }
 

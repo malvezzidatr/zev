@@ -44,7 +44,9 @@ export class ZevMultiSelect extends ZevBase {
 
   @state() private _isOpen = false;
   @state() private _searchQuery = '';
+  @state() private _focusedIndex = -1;
 
+  private _multiSelectId = `zev-multi-select-${Math.random().toString(36).substring(2, 9)}`;
   private _boundHandleClickOutside = this._handleClickOutside.bind(this);
 
   connectedCallback() {
@@ -55,6 +57,16 @@ export class ZevMultiSelect extends ZevBase {
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('click', this._boundHandleClickOutside);
+  }
+
+  updated(changed: Map<string, unknown>) {
+    super.updated(changed);
+    if (changed.has('_focusedIndex') && this._focusedIndex >= 0) {
+      const options = this.shadowRoot?.querySelectorAll<HTMLElement>('[role="option"]');
+      if (options && options[this._focusedIndex]) {
+        options[this._focusedIndex].focus();
+      }
+    }
   }
 
   private _handleClickOutside(e: MouseEvent) {
@@ -71,6 +83,72 @@ export class ZevMultiSelect extends ZevBase {
     this._isOpen = !this._isOpen;
     if (!this._isOpen) {
       this._searchQuery = '';
+      this._focusedIndex = -1;
+    }
+  }
+
+  private _handleTriggerKeydown(e: KeyboardEvent) {
+    if (this.disabled) return;
+
+    switch (e.key) {
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        this._toggleDropdown();
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        if (!this._isOpen) {
+          this._isOpen = true;
+        }
+        this._focusedIndex = 0;
+        break;
+      case 'Escape':
+        if (this._isOpen) {
+          e.preventDefault();
+          this._isOpen = false;
+          this._searchQuery = '';
+          this._focusedIndex = -1;
+          // Return focus to trigger
+          const trigger = this.shadowRoot?.querySelector<HTMLElement>('.multi-select__trigger');
+          trigger?.focus();
+        }
+        break;
+      case 'ArrowUp':
+        if (this._isOpen) {
+          e.preventDefault();
+          const opts = this._filteredOptions;
+          this._focusedIndex = opts.length - 1;
+        }
+        break;
+    }
+  }
+
+  private _handleOptionKeydown(e: KeyboardEvent, index: number) {
+    const options = this._filteredOptions;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        this._focusedIndex = index < options.length - 1 ? index + 1 : 0;
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        this._focusedIndex = index > 0 ? index - 1 : options.length - 1;
+        break;
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        this._toggleOption(options[index].value);
+        break;
+      case 'Escape':
+        e.preventDefault();
+        this._isOpen = false;
+        this._searchQuery = '';
+        this._focusedIndex = -1;
+        const trigger = this.shadowRoot?.querySelector<HTMLElement>('.multi-select__trigger');
+        trigger?.focus();
+        break;
     }
   }
 
@@ -124,7 +202,7 @@ export class ZevMultiSelect extends ZevBase {
 
   private _renderLabel() {
     if (!this.label) return nothing;
-    return html`<label class="multi-select__label">${this.label}</label>`;
+    return html`<label class="multi-select__label" id="${this._multiSelectId}-label">${this.label}</label>`;
   }
 
   private _renderTags() {
@@ -162,24 +240,30 @@ export class ZevMultiSelect extends ZevBase {
 
     return html`
       <span class=${classMap(classes)}>
-        <svg viewBox="0 0 24 24">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
         </svg>
       </span>
     `;
   }
 
-  private _renderOption(option: MultiSelectOption) {
+  private _renderOption(option: MultiSelectOption, index: number) {
     const isSelected = this.value.includes(option.value);
+    const isFocused = this._focusedIndex === index;
     const classes = {
       'multi-select__option': true,
       'multi-select__option--selected': isSelected,
+      'multi-select__option--focused': isFocused,
     };
 
     return html`
       <div
         class=${classMap(classes)}
+        role="option"
+        aria-selected=${isSelected}
+        tabindex=${isFocused ? '0' : '-1'}
         @click=${() => this._toggleOption(option.value)}
+        @keydown=${(e: KeyboardEvent) => this._handleOptionKeydown(e, index)}
       >
         ${this._renderCheckbox(isSelected)}
         ${option.icon ? html`
@@ -209,9 +293,9 @@ export class ZevMultiSelect extends ZevBase {
             />
           </div>
         ` : nothing}
-        <div class="multi-select__options">
+        <div class="multi-select__options" role="listbox" aria-multiselectable="true">
           ${filteredOptions.length > 0
-            ? filteredOptions.map(opt => this._renderOption(opt))
+            ? filteredOptions.map((opt, i) => this._renderOption(opt, i))
             : html`<div class="multi-select__empty">Nenhuma opção encontrada</div>`
           }
         </div>
@@ -239,10 +323,16 @@ export class ZevMultiSelect extends ZevBase {
         <div class="multi-select-wrapper">
           <div
             class=${classMap(triggerClasses)}
+            role="combobox"
+            tabindex="0"
+            aria-expanded=${this._isOpen}
+            aria-haspopup="listbox"
+            aria-labelledby=${this.label ? `${this._multiSelectId}-label` : nothing}
             @click=${this._toggleDropdown}
+            @keydown=${this._handleTriggerKeydown}
           >
             ${this._renderTags()}
-            <svg class=${classMap(chevronClasses)} viewBox="0 0 24 24" fill="currentColor">
+            <svg class=${classMap(chevronClasses)} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M7 10l5 5 5-5z"/>
             </svg>
           </div>

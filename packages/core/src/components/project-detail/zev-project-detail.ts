@@ -2,6 +2,7 @@ import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ZevBase } from '../../base/zev-base.js';
 import { styles } from './zev-project-detail.styles.js';
+import { activateFocusTrap, type FocusTrapResult } from '../../base/focus-trap.js';
 
 export interface ProjectData {
   number: string;
@@ -20,6 +21,7 @@ export class ZevProjectDetail extends ZevBase {
   @property({ type: Object }) project: ProjectData | null = null;
 
   private _boundKeydown = this._handleKeydown.bind(this);
+  private _focusTrap: FocusTrapResult | null = null;
 
   connectedCallback() {
     super.connectedCallback();
@@ -29,12 +31,26 @@ export class ZevProjectDetail extends ZevBase {
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('keydown', this._boundKeydown);
+    this._focusTrap?.deactivate();
+    this._focusTrap = null;
     document.body.style.overflow = '';
   }
 
   updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('open')) {
-      document.body.style.overflow = this.open ? 'hidden' : '';
+      if (this.open) {
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => {
+          const content = this.shadowRoot?.querySelector<HTMLElement>('.modal__content');
+          if (content) {
+            this._focusTrap = activateFocusTrap(content);
+          }
+        });
+      } else {
+        this._focusTrap?.deactivate();
+        this._focusTrap = null;
+        document.body.style.overflow = '';
+      }
     }
   }
 
@@ -59,9 +75,9 @@ export class ZevProjectDetail extends ZevBase {
 
     return html`
       <div class="modal__overlay" @click=${this._handleOverlayClick}>
-        <div class="modal__content" role="dialog" aria-modal="true">
-          <button class="modal__close" @click=${this._requestClose} aria-label="Close">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="project-detail-title">
+          <button class="modal__close" @click=${this._requestClose} aria-label="Fechar">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -72,7 +88,7 @@ export class ZevProjectDetail extends ZevBase {
             <span class="modal__role">${this.project.role}</span>
           </div>
 
-          <h2 class="modal__title">${this.project.title}</h2>
+          <h2 id="project-detail-title" class="modal__title">${this.project.title}</h2>
 
           <div class="modal__tags">
             ${this.project.techTags.map(tag => html`

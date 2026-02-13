@@ -142,4 +142,9 @@ export const styles = css`
   :host([disabled]) .input__label {
     opacity: 0.5;
   }
+
+  .input__clear:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
 `;

@@ -20,9 +20,22 @@ export class ZevProjectCard extends ZevBase {
     });
   }
 
+  private _handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._handleClick();
+    }
+  }
+
   render() {
     return html`
-      <article class="card" @click=${this._handleClick}>
+      <article
+        class="card"
+        tabindex="0"
+        role="article"
+        aria-label=${this.title}
+        @click=${this._handleClick}
+        @keydown=${this._handleKeydown}>
         <div class="card__header">
           <span class="card__number">${this.number}</span>
           <span class="card__role">${this.role}</span>

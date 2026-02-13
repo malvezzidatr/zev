@@ -44,6 +44,11 @@ export const styles = css`
     transform: rotate(90deg);
   }
 
+  .modal__close:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
   .modal__header {
     display: flex;
     align-items: center;

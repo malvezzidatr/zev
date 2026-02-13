@@ -30,7 +30,7 @@ export class ZevStatCard extends ZevBase {
     };
 
     return html`
-      <div class=${classMap(classes)}>
+      <div class=${classMap(classes)} aria-label="${this.value} ${this.label}">
         <div class="stat-card__icon">
           <slot name="icon"></slot>
         </div>

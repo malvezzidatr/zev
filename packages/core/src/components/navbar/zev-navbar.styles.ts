@@ -142,4 +142,19 @@ export const styles = css`
       transform: translateX(0);
     }
   }
+
+  .navbar__link:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .navbar__lang-toggle:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .navbar__hamburger:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
 `;

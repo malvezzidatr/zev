@@ -271,4 +271,34 @@ describe('zev-file-upload', () => {
     const files = shadowQueryAll<HTMLElement>(element, '.upload__file');
     expect(files).toHaveLength(1);
   });
+
+  describe('accessibility', () => {
+    it('should have role button on dropzone', async () => {
+      const dropzone = shadowQuery<HTMLElement>(element, '.upload__dropzone');
+      expect(dropzone?.getAttribute('role')).toBe('button');
+    });
+
+    it('should have tabindex 0 on dropzone', async () => {
+      const dropzone = shadowQuery<HTMLElement>(element, '.upload__dropzone');
+      expect(dropzone?.getAttribute('tabindex')).toBe('0');
+    });
+
+    it('should have aria-label on dropzone', async () => {
+      const dropzone = shadowQuery<HTMLElement>(element, '.upload__dropzone');
+      expect(dropzone?.getAttribute('aria-label')).toContain('Arraste arquivos');
+    });
+
+    it('should have aria-hidden on upload icon SVG', async () => {
+      const svg = shadowQuery<SVGElement>(element, '.upload__icon');
+      expect(svg?.getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('should show error with aria-live assertive', async () => {
+      element.error = 'Arquivo inválido';
+      await elementUpdated(element);
+
+      const error = shadowQuery<HTMLElement>(element, '.upload__error');
+      expect(error?.getAttribute('aria-live')).toBe('assertive');
+    });
+  });
 });

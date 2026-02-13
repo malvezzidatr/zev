@@ -147,4 +147,14 @@ export const styles = css`
     font-size: var(--zev-fs-small);
     color: var(--zev-color-error);
   }
+
+  .upload__dropzone:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
+
+  .upload__file-remove:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
 `;

@@ -80,4 +80,9 @@ export const styles = css`
     text-transform: uppercase;
     letter-spacing: var(--zev-ls-wide);
   }
+
+  .card:focus-visible {
+    outline: 2px solid var(--zev-color-accent);
+    outline-offset: 2px;
+  }
 `;
