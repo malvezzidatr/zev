@@ -34,7 +34,7 @@ export type { TimelineItemData } from './components/timeline/zev-timeline.js';
 export { ZevTimelineItem } from './components/timeline-item/zev-timeline-item.js';
 
 export { ZevBadge } from './components/badge/zev-badge.js';
-export type { BadgeVariant } from './components/badge/zev-badge.js';
+export type { BadgeVariant, BadgeLevel } from './components/badge/zev-badge.js';
 
 export { ZevLoader } from './components/loader/zev-loader.js';
 export type { LoaderSize } from './components/loader/zev-loader.js';
@@ -76,5 +76,8 @@ export { ZevCarouselItem } from './components/carousel/zev-carousel-item.js';
 
 export { ZevSkillCard } from './components/skill-card/zev-skill-card.js';
 export type { SkillBadgeVariant, ResourceType, SkillResource } from './components/skill-card/zev-skill-card.js';
+
+export { ZevStatCard } from './components/stat-card/zev-stat-card.js';
+export type { StatCardVariant } from './components/stat-card/zev-stat-card.js';
 
 export { ZevBase } from './base/zev-base.js';

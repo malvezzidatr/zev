@@ -47,4 +47,30 @@ describe('zev-loader', () => {
     const skeleton = shadowQuery<HTMLDivElement>(element, '.skeleton');
     expect(skeleton?.classList.contains('skeleton')).toBe(true);
   });
+
+  it('should apply custom width', async () => {
+    element.width = '200px';
+    await elementUpdated(element);
+
+    const skeleton = shadowQuery<HTMLDivElement>(element, '.skeleton');
+    expect(skeleton?.style.width).toBe('200px');
+  });
+
+  it('should apply custom height', async () => {
+    element.height = '3rem';
+    await elementUpdated(element);
+
+    const skeleton = shadowQuery<HTMLDivElement>(element, '.skeleton');
+    expect(skeleton?.style.height).toBe('3rem');
+  });
+
+  it('should apply both width and height', async () => {
+    element.width = '100px';
+    element.height = '20px';
+    await elementUpdated(element);
+
+    const skeleton = shadowQuery<HTMLDivElement>(element, '.skeleton');
+    expect(skeleton?.style.width).toBe('100px');
+    expect(skeleton?.style.height).toBe('20px');
+  });
 });

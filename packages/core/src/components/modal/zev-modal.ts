@@ -16,6 +16,7 @@ export class ZevModal extends ZevBase {
   @property({ type: Boolean, attribute: 'close-on-overlay' }) closeOnOverlay = true;
   @property({ type: Boolean, attribute: 'close-on-escape' }) closeOnEscape = true;
 
+  private static _openCount = 0;
   private _boundKeydown = this._handleKeydown.bind(this);
 
   connectedCallback() {
@@ -26,14 +27,25 @@ export class ZevModal extends ZevBase {
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('keydown', this._boundKeydown);
-    document.body.style.overflow = '';
+    if (this.open) {
+      ZevModal._openCount = Math.max(0, ZevModal._openCount - 1);
+      if (ZevModal._openCount === 0) {
+        document.body.style.overflow = '';
+      }
+    }
   }
 
   updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('open')) {
-      document.body.style.overflow = this.open ? 'hidden' : '';
       if (this.open) {
+        ZevModal._openCount++;
+        document.body.style.overflow = 'hidden';
         this.emitEvent('modal-open');
+      } else {
+        ZevModal._openCount = Math.max(0, ZevModal._openCount - 1);
+        if (ZevModal._openCount === 0) {
+          document.body.style.overflow = '';
+        }
       }
     }
   }

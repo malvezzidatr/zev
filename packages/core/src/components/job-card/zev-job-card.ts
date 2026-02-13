@@ -1,5 +1,6 @@
 import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ZevBase } from '../../base/zev-base.js';
 import { styles } from './zev-job-card.styles.js';
 import '../tag/zev-tag.js';
@@ -41,6 +42,9 @@ export class ZevJobCard extends ZevBase {
   /** Job source (GitHub, LinkedIn, Gupy) */
   @property() source = '';
 
+  /** Disable hover effects */
+  @property({ type: Boolean, attribute: 'disable-hover' }) disableHover = false;
+
   private _handleClick() {
     this.emitEvent('card-click', {
       title: this.title,
@@ -67,7 +71,7 @@ export class ZevJobCard extends ZevBase {
 
   render() {
     return html`
-      <article class="job-card" @click=${this._handleClick}>
+      <article class=${classMap({ 'job-card': true, 'job-card--no-hover': this.disableHover })} @click=${this._handleClick}>
         <div class="job-card__header">
           <h3 class="job-card__title">${this.title}</h3>
           ${this.remote ? html`<zev-badge variant="success" label="Remoto"></zev-badge>` : nothing}

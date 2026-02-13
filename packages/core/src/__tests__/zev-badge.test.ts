@@ -59,6 +59,41 @@ describe('zev-badge', () => {
     expect(badge?.classList.contains('badge--info')).toBe(true);
   });
 
+  it('should apply match variant class', async () => {
+    element.variant = 'match';
+    await elementUpdated(element);
+
+    const badge = shadowQuery<HTMLSpanElement>(element, '.badge');
+    expect(badge?.classList.contains('badge--match')).toBe(true);
+  });
+
+  it('should apply match-low level class', async () => {
+    element.variant = 'match';
+    element.level = 'low';
+    await elementUpdated(element);
+
+    const badge = shadowQuery<HTMLSpanElement>(element, '.badge');
+    expect(badge?.classList.contains('badge--match-low')).toBe(true);
+    expect(badge?.classList.contains('badge--match-medium')).toBe(false);
+  });
+
+  it('should apply match-medium level class by default', async () => {
+    element.variant = 'match';
+    await elementUpdated(element);
+
+    const badge = shadowQuery<HTMLSpanElement>(element, '.badge');
+    expect(badge?.classList.contains('badge--match-medium')).toBe(true);
+  });
+
+  it('should apply match-high level class', async () => {
+    element.variant = 'match';
+    element.level = 'high';
+    await elementUpdated(element);
+
+    const badge = shadowQuery<HTMLSpanElement>(element, '.badge');
+    expect(badge?.classList.contains('badge--match-high')).toBe(true);
+  });
+
   it('should render slotted content', async () => {
     cleanup(element);
     const container = document.createElement('div');

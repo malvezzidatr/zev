@@ -202,6 +202,56 @@ describe('zev-file-upload', () => {
     expect(dropzone?.classList.contains('upload__dropzone--dragging')).toBe(false);
   });
 
+  it('should replace file in single mode when another is selected', async () => {
+    // Select first file
+    const file1 = new File(['test1'], 'file1.txt', { type: 'text/plain' });
+    const dt1 = new DataTransfer();
+    dt1.items.add(file1);
+
+    const input = shadowQuery<HTMLInputElement>(element, '.upload__input');
+    Object.defineProperty(input, 'files', { value: dt1.files, configurable: true });
+    input?.dispatchEvent(new Event('change'));
+    await elementUpdated(element);
+
+    let files = shadowQueryAll<HTMLElement>(element, '.upload__file');
+    expect(files).toHaveLength(1);
+    expect(shadowQuery<HTMLElement>(element, '.upload__file-name')?.textContent).toBe('file1.txt');
+
+    // Select second file — should replace, not block
+    const file2 = new File(['test2'], 'file2.txt', { type: 'text/plain' });
+    const dt2 = new DataTransfer();
+    dt2.items.add(file2);
+
+    const input2 = shadowQuery<HTMLInputElement>(element, '.upload__input');
+    Object.defineProperty(input2, 'files', { value: dt2.files, configurable: true });
+    input2?.dispatchEvent(new Event('change'));
+    await elementUpdated(element);
+
+    files = shadowQueryAll<HTMLElement>(element, '.upload__file');
+    expect(files).toHaveLength(1);
+    expect(shadowQuery<HTMLElement>(element, '.upload__file-name')?.textContent).toBe('file2.txt');
+  });
+
+  it('should clear files with clearFiles()', async () => {
+    const file = new File(['test'], 'test.txt', { type: 'text/plain' });
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+
+    const input = shadowQuery<HTMLInputElement>(element, '.upload__input');
+    Object.defineProperty(input, 'files', { value: dataTransfer.files });
+    input?.dispatchEvent(new Event('change'));
+    await elementUpdated(element);
+
+    let files = shadowQueryAll<HTMLElement>(element, '.upload__file');
+    expect(files).toHaveLength(1);
+
+    element.clearFiles();
+    await elementUpdated(element);
+
+    files = shadowQueryAll<HTMLElement>(element, '.upload__file');
+    expect(files).toHaveLength(0);
+  });
+
   it('should respect maxFiles limit', async () => {
     element.maxFiles = 1;
     element.multiple = true;

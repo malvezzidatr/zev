@@ -136,6 +136,19 @@ describe('zev-job-card', () => {
     });
   });
 
+  it('should apply no-hover class when disableHover is true', async () => {
+    element.disableHover = true;
+    await elementUpdated(element);
+
+    const card = shadowQuery<HTMLElement>(element, '.job-card');
+    expect(card?.classList.contains('job-card--no-hover')).toBe(true);
+  });
+
+  it('should not have no-hover class by default', () => {
+    const card = shadowQuery<HTMLElement>(element, '.job-card');
+    expect(card?.classList.contains('job-card--no-hover')).toBe(false);
+  });
+
   it('should have article element for accessibility', () => {
     const article = shadowQuery<HTMLElement>(element, 'article.job-card');
     expect(article).toBeDefined();

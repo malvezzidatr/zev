@@ -27,5 +27,6 @@ export { ZevProgressBar } from './components/ZevProgressBar.js';
 export { ZevCarousel } from './components/ZevCarousel.js';
 export { ZevCarouselItem } from './components/ZevCarouselItem.js';
 export { ZevSkillCard } from './components/ZevSkillCard.js';
+export { ZevStatCard } from './components/ZevStatCard.js';
 
-export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData, BadgeVariant, LoaderSize, ButtonVariant, ButtonSize, InputIcon, SelectOption, MultiSelectOption, SidebarVariant, ModalSize, UploadedFile, ProgressBarVariant, ProgressBarSize, CarouselGap, SkillBadgeVariant, ResourceType, SkillResource } from '@malvezzidatr/zev-core';
+export type { NavLink, TimelineItem, ProjectData, FooterLink, FooterInfo, ThemeMode, BlogPostData, TagVariant, TagSize, SectionHeaderVariant, SectionHeaderSize, TimelineItemData, BadgeVariant, BadgeLevel, LoaderSize, ButtonVariant, ButtonSize, InputIcon, SelectOption, MultiSelectOption, SidebarVariant, ModalSize, UploadedFile, ProgressBarVariant, ProgressBarSize, CarouselGap, SkillBadgeVariant, ResourceType, SkillResource, StatCardVariant } from '@malvezzidatr/zev-core';

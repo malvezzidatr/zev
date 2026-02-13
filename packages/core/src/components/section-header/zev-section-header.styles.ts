@@ -20,7 +20,7 @@ export const styles = css`
   }
 
   .header__title {
-    font-size: var(--zev-fs-heading);
+    font-size: var(--zev-section-header-title-size, var(--zev-fs-heading));
     font-weight: var(--zev-fw-black);
     color: var(--zev-color-text-primary);
     text-transform: uppercase;

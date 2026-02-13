@@ -58,6 +58,11 @@ export default {
       control: 'text',
       description: 'Fonte da vaga',
     },
+    disableHover: {
+      control: 'boolean',
+      description: 'Desabilita efeito de hover',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 
@@ -156,6 +161,25 @@ export const ManyTags = {
         remote
         posted-at="Há 3 dias"
         source="LinkedIn"
+        @card-click=${(e: CustomEvent) => action('card-click')(e.detail)}
+      ></zev-job-card>
+    </div>
+  `,
+};
+
+export const DisabledHover = {
+  name: 'Sem Hover',
+  render: () => html`
+    <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 500px;">
+      <zev-job-card
+        title="Senior Frontend Developer"
+        company="Tech Company"
+        location="São Paulo, SP"
+        .tags=${['React', 'TypeScript']}
+        remote
+        posted-at="Há 2 dias"
+        source="LinkedIn"
+        disable-hover
         @card-click=${(e: CustomEvent) => action('card-click')(e.detail)}
       ></zev-job-card>
     </div>

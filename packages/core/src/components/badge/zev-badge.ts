@@ -4,7 +4,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ZevBase } from '../../base/zev-base.js';
 import { styles } from './zev-badge.styles.js';
 
-export type BadgeVariant = 'success' | 'warning' | 'info' | 'neutral';
+export type BadgeVariant = 'success' | 'warning' | 'info' | 'neutral' | 'match';
+export type BadgeLevel = 'low' | 'medium' | 'high';
 
 /**
  * Badge component for status indicators
@@ -20,6 +21,9 @@ export class ZevBadge extends ZevBase {
   /** Text label for the badge (alternative to slot) */
   @property() label = '';
 
+  /** Match level for the match variant */
+  @property() level: BadgeLevel = 'medium';
+
   render() {
     const classes = {
       badge: true,
@@ -27,6 +31,10 @@ export class ZevBadge extends ZevBase {
       'badge--warning': this.variant === 'warning',
       'badge--info': this.variant === 'info',
       'badge--neutral': this.variant === 'neutral',
+      'badge--match': this.variant === 'match',
+      'badge--match-low': this.variant === 'match' && this.level === 'low',
+      'badge--match-medium': this.variant === 'match' && this.level === 'medium',
+      'badge--match-high': this.variant === 'match' && this.level === 'high',
     };
 
     return html`

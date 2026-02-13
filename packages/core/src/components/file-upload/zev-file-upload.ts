@@ -25,6 +25,10 @@ export class ZevFileUpload extends ZevBase {
   @state() private _files: UploadedFile[] = [];
   @state() private _isDragging = false;
 
+  public clearFiles() {
+    this._files = [];
+  }
+
   private _generateId(): string {
     return Math.random().toString(36).substring(2, 11);
   }
@@ -75,10 +79,11 @@ export class ZevFileUpload extends ZevBase {
     const validFiles: UploadedFile[] = [];
 
     for (const file of files) {
-      if (!this.multiple && this._files.length + validFiles.length >= 1) {
+      if (!this.multiple && validFiles.length >= 1) {
         break;
       }
-      if (this._files.length + validFiles.length >= this.maxFiles) {
+      const currentCount = this.multiple ? this._files.length : 0;
+      if (currentCount + validFiles.length >= this.maxFiles) {
         errors.push(`Máximo de ${this.maxFiles} arquivo(s) permitido(s)`);
         break;
       }

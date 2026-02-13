@@ -25,6 +25,14 @@ export default {
       description: 'Tamanho do skeleton',
       table: { defaultValue: { summary: 'md' } },
     },
+    width: {
+      control: 'text',
+      description: 'Largura customizada (ex: "200px", "100%")',
+    },
+    height: {
+      control: 'text',
+      description: 'Altura customizada (ex: "20px", "2rem")',
+    },
   },
 };
 
@@ -70,6 +78,22 @@ export const CardSkeleton = {
           <zev-loader size="sm" style="width: 80px;"></zev-loader>
         </div>
         <zev-loader size="sm"></zev-loader>
+      </div>
+    </div>
+  `,
+};
+
+export const CustomDimensions = {
+  name: 'Dimensões Customizadas',
+  render: () => html`
+    <div style="padding: 2rem; background: var(--zev-color-bg-primary); max-width: 400px; display: flex; flex-direction: column; gap: 1rem;">
+      <zev-loader width="200px" height="20px"></zev-loader>
+      <zev-loader width="60px" height="2rem"></zev-loader>
+      <zev-loader width="100%" height="40px"></zev-loader>
+      <div style="display: flex; gap: 0.5rem;">
+        <zev-loader width="60px" height="1rem"></zev-loader>
+        <zev-loader width="80px" height="1rem"></zev-loader>
+        <zev-loader width="50px" height="1rem"></zev-loader>
       </div>
     </div>
   `,

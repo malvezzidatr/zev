@@ -153,6 +153,31 @@ describe('zev-modal', () => {
     expect(document.body.style.overflow).toBe('');
   });
 
+  it('should keep body overflow hidden when one of two modals closes', async () => {
+    const modal2 = fixture<ZevModal>('zev-modal');
+    await elementUpdated(modal2);
+
+    element.open = true;
+    await elementUpdated(element);
+    expect(document.body.style.overflow).toBe('hidden');
+
+    modal2.open = true;
+    await elementUpdated(modal2);
+    expect(document.body.style.overflow).toBe('hidden');
+
+    // Close first modal — second is still open
+    element.open = false;
+    await elementUpdated(element);
+    expect(document.body.style.overflow).toBe('hidden');
+
+    // Close second modal — all closed
+    modal2.open = false;
+    await elementUpdated(modal2);
+    expect(document.body.style.overflow).toBe('');
+
+    cleanup(modal2);
+  });
+
   it('should render slotted content', async () => {
     element.open = true;
     element.innerHTML = '<p>Modal content</p>';

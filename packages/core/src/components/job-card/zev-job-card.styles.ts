@@ -23,8 +23,18 @@ export const styles = css`
 
   .job-card:hover {
     border-color: var(--zev-color-accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: var(--zev-job-card-hover-transform, translateY(-2px));
+    box-shadow: var(--zev-job-card-hover-shadow, 0 8px 16px rgba(0, 0, 0, 0.1));
+  }
+
+  .job-card--no-hover:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--zev-color-border-tag);
+  }
+
+  .job-card--no-hover:hover .job-card__title {
+    color: var(--zev-color-text-primary);
   }
 
   .job-card__header {

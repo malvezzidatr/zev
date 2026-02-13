@@ -11,6 +11,58 @@ e o versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.8.0] - 2025-02-13
+
+### Added
+
+#### @malvezzidatr/zev-core
+
+- **zev-stat-card** — Novo componente de card para exibir estatísticas numéricas
+  - Props: `value`, `label`, `variant` (default/accent)
+  - Slot para ícone customizado
+  - Suporte completo a dark mode
+
+- **zev-badge** — Nova variante `match` com níveis de compatibilidade
+  - Variante `match` com prop `level`: `low` (vermelho), `medium` (laranja), `high` (verde)
+  - Ideal para exibir percentuais de match/compatibilidade
+
+- **zev-job-card** — Prop `disable-hover` para desabilitar efeito de hover
+  - CSS custom properties: `--zev-job-card-hover-transform`, `--zev-job-card-hover-shadow`
+
+- **zev-loader** — Props `width` e `height` para dimensões customizáveis
+  - Permite criar skeleton loaders com tamanhos específicos
+
+- **zev-file-upload** — Método público `clearFiles()` para controle externo
+
+- **zev-section-header** — CSS custom property `--zev-section-header-title-size` para customização do tamanho do título
+
+#### @malvezzidatr/zev-react
+
+- `ZevStatCard` wrapper
+- Export dos tipos: `StatCardVariant`, `BadgeLevel`
+
+#### Storybook
+
+- Story `StatCard` com 3 variantes (Default, Accent, StatsGrid)
+- Story `Badge` com variante MatchBadge
+- Story `JobCard` com variante DisabledHover
+- Story `Loader` com variante CustomDimensions
+
+### Fixed
+
+#### @malvezzidatr/zev-core
+
+- **zev-file-upload** — Corrigido bug que impedia substituição de arquivo em modo single
+- **zev-modal** — Corrigido conflito de `overflow: hidden` no body com múltiplos modais
+- **zev-select**, **zev-multi-select**, **zev-input** — Adicionado `width: 100%` no `:host`
+
+### Tests
+
+- 20 novos testes unitários
+- Total: 391 testes passando
+
+---
+
 ## [0.7.9] - 2025-02-03
 
 ### Fixed

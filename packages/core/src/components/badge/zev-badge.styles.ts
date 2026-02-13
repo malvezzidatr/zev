@@ -37,4 +37,19 @@ export const styles = css`
     background: var(--zev-color-bg-secondary);
     color: var(--zev-color-text-secondary);
   }
+
+  .badge--match-low {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+  }
+
+  .badge--match-medium {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--zev-color-warning);
+  }
+
+  .badge--match-high {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--zev-color-success);
+  }
 `;

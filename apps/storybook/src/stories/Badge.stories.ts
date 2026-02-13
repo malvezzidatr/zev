@@ -7,7 +7,7 @@ import '@malvezzidatr/zev-core';
  * Componente de badge para indicadores de status.
  *
  * ### Características
- * - 4 variantes: success, warning, info, neutral
+ * - 5 variantes: success, warning, info, neutral, match
  * - Suporta conteúdo via slot ou prop `label`
  * - Design compacto para uso em cards e listas
  *
@@ -21,7 +21,7 @@ export default {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['success', 'warning', 'info', 'neutral'],
+      options: ['success', 'warning', 'info', 'neutral', 'match'],
       description: 'Variante visual do badge',
       table: { defaultValue: { summary: 'neutral' } },
     },
@@ -53,6 +53,17 @@ export const Variants = {
       <zev-badge variant="warning" label="Warning"></zev-badge>
       <zev-badge variant="info" label="Info"></zev-badge>
       <zev-badge variant="neutral" label="Neutral"></zev-badge>
+    </div>
+  `,
+};
+
+export const MatchBadge = {
+  name: 'Match Badge',
+  render: () => html`
+    <div style="padding: 2rem; background: var(--zev-color-bg-primary); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <zev-badge variant="match" level="low" label="15% Match"></zev-badge>
+      <zev-badge variant="match" level="medium" label="50% Match"></zev-badge>
+      <zev-badge variant="match" level="high" label="85% Match"></zev-badge>
     </div>
   `,
 };
